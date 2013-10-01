@@ -86,9 +86,9 @@
     {\usebibmacro{bbx:dashcheck}
        {\bibnamedash}
        {\printnames{editor}%
-  \setunit{\addcomma\space}%
+  \setunit{\addspace}%
   \usebibmacro{bbx:savehash}}%
-     \usebibmacro{#1}%
+     \printtext[parens]{\usebibmacro{#1}}%
      \clearname{editor}%
      \newunit}%                                         period instead of space
     {\global\undef\bbx@lasthash
@@ -162,18 +162,6 @@
   	{\setunit*{\addspace}%
      \printtext[parens]{\mkbibdateunified{urlyear}{urlmonth}{urlday}}}%
   }
-
-\renewbibmacro*{editor+others}{%
-  \ifboolexpr{
-    test \ifuseeditor
-    and
-    not test {\ifnameundef{editor}}
-  }
-    {\printnames{editor}%
-     \setunit{\addspace}%
-     \printtext[parens]{\usebibmacro{editor+othersstrg}}%  putting (ed.) or (eds.) after editors of books
-     \clearname{editor}}
-    {}}
 
 \renewbibmacro*{series+number}{%
   \iffieldundef{series}
