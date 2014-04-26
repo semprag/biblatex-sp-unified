@@ -365,8 +365,9 @@
   \usebibmacro{byauthor}%
   \newunit\newblock
   \usebibmacro{in:}%
-  \usebibmacro{byeditor+others}%
-  \setunit{\addcomma\space}
+  \ifnameundef{editor}
+    {\setunit{\addspace}}
+    {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
   \usebibmacro{maintitle+booktitle}%
   \setunit{\addcomma\space}
   \printfield{edition}%
@@ -414,8 +415,9 @@
   \usebibmacro{byauthor}%
   \newunit\newblock
   \usebibmacro{in:}%
-  \usebibmacro{byeditor+others}%
-  \setunit{\addcomma\space}
+  \ifnameundef{editor}
+    {\setunit{\addspace}}
+    {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
   \usebibmacro{maintitle+booktitle}%
   \setunit{\addcomma\space}
   \printfield{edition}%
