@@ -408,55 +408,7 @@
     {}%
   \usebibmacro{finentry}}
 
- \DeclareBibliographyDriver{incollection}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author/translator+others}%
-  \setunit{\labelnamepunct}\newblock
-  \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \ifnameundef{editor}
-    {\setunit{\addspace}}
-    {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
-  \usebibmacro{maintitle+booktitle}%
-  \setunit{\addcomma\space}
-  \printfield{edition}%
-  \setunit{\addcomma\space}
-  \iffieldundef{maintitle}
-    {\printfield{volume}%
-     \printfield{part}}
-    {}%
-  \setunit{\addcomma\space}
-  \printfield{volumes}%
-  \setunit{\addspace}%
-  \usebibmacro{series+number}%
-  \setunit{\addcomma\space}
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
-  \newunit\newblock
-  \iftoggle{bbx:related}
-    {\usebibmacro{related:init}%
-     \usebibmacro{related}}
-    {}%
-  \usebibmacro{finentry}}
+\DeclareBibliographyAlias{incollection}{inproceedings}
 
 % Given the guidelines in the unified style sheet, we should print conference
 % proceedings and working papers as @article's just in case the publication has
