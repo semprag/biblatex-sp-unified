@@ -464,6 +464,7 @@
 % entry type, we can implement this by checking if the inproceedings entry has an
 % ISSN. If the field is undefined, the driver will do what driver did for 
 % @inproceedings entries as of 512f11657199a6044f7663da454f3eac338bdbd5
+% except that \printlist{organization} and \newunit have been removed.
 % On the other hand, if the ISSN field is not undefined, then we will do largely
 % the exact same thing that we do in the @article driver, except that we use the
 % two macros \usebibmacro{unified:proc-as-article:maintitle+booktitle} and 
@@ -504,8 +505,6 @@
      \newunit\newblock
      \printfield{note}%
      \newunit\newblock
-     \printlist{organization}%
-     \newunit
      \usebibmacro{publisher+location+date}%
      \newunit\newblock
      \iftoggle{bbx:isbn}
