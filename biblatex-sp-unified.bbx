@@ -127,10 +127,61 @@
        \setunit{\subtitlepunct}%
        \printfield{journalsubtitle}}}}
 
+% The next three bib macros are for printing the maintitle and booktitle fields
+% of an @inproceedings entry with an ISSN as an article in accordance with the
+% unified style sheet guidelines.
+% 1. maintitle
+\newbibmacro*{unified:proc-as-article:maintitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }
+    {}
+    {\printtext{%
+       \printfield[maintitle]{maintitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[maintitle]{mainsubtitle}}%
+     \newunit}%
+  \printfield{maintitleaddon}}
+
+% 2. booktitle
+\newbibmacro*{unified:proc-as-article:booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }
+    {}
+    {\printtext{%
+       \printfield[booktitle]{booktitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[booktitle]{booksubtitle}}%
+     \newunit}%
+  \printfield{booktitleaddon}}
+
+% 3. maintitle+booktitle
+\newbibmacro*{unified:proc-as-article:maintitle+booktitle}{%
+  \iffieldundef{maintitle}
+    {}
+    {\usebibmacro{unified:proc-as-article:maintitle}%
+     \newunit\newblock}
+  \usebibmacro{unified:proc-as-article:booktitle}%
+  \newunit}
+
 \renewbibmacro*{volume+number+eid}{%
   \printfield{volume}%
 %  \setunit*{\adddot}%
   \printfield[parens]{number}%        parentheses instead of dot before issue number
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% This is for printing the volume field of a proceedings with an ISSN as an article
+% in accordance with the unified style sheet guidelines. It depends on the declared
+% field format below.
+\newbibmacro*{unified:proc-as-article:volume+number+eid}{%
+  \printfield[volume:unified:proc-as-article]{volume}%
+  \printfield[parens]{number}%
   \setunit{\addcomma\space}%
   \printfield{eid}}
 
@@ -256,6 +307,10 @@
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
 \DeclareFieldFormat{doi}{\doi{#1}}
 \DeclareFieldFormat{url}{\url{#1}}
+
+% This is for printing the volume field of a proceedings with an ISSN as an article
+% in accordance with the unified style sheet guidelines
+\DeclareFieldFormat{volume:unified:proc-as-article}{#1}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The bibliography drivers, specifying the formats of each type of entry in the bibliography
