@@ -254,7 +254,10 @@
 \DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
 
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
-\DeclareFieldFormat{doi}{\doi{#1}}
+\DeclareFieldFormat{doi}{%
+  \ifhyperref
+    {\href{http://dx.doi.org/#1}{\nolinkurl{http://dx.doi.org/#1}}}
+    {\nolinkurl{http://dx.doi.org/#1}}}
 \DeclareFieldFormat{url}{\url{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
