@@ -119,7 +119,7 @@ NB: The examples included with the Unified Style Sheet do not include the editor
     @inproceedings{casali:1998a,
         Author = {Casali, Roderic F.},
         Booktitle = {Chicago Linguistic Society (CLS)},
-        ISSN = 0577-7240,
+        ISSN = {0577-7240},
         Number = {1},
         Pages = {55-68},
         Title = {Predicting {ATR} Activity},
