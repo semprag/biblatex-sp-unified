@@ -116,7 +116,7 @@ NB: The examples included with the Unified Style Sheet do not include the editor
 
 *Option 1*: Use the `@inproceedings` entry type and include the ISSN of the proceedings when available. Example:
 
-    @inproceedings{casali:1998,
+    @inproceedings{casali:1998a,
         Author = {Casali, Roderic F.},
         Booktitle = {Chicago Linguistic Society (CLS)},
         ISSN = 0577-7240,
@@ -136,7 +136,7 @@ Comment: Following the Unified Style Sheet, we can let the presence of an ISSN c
 
 *Option 2*: Another option, less portable and definitely a hack, is to use the `@article` entry type, putting the conference name (and the acronym in parentheses; no need to case protect the acronym, since journal titles are set as is) in the `journal` field, and do not list the editors. Example:
 
-    @article{casali:1998,
+    @article{casali:1998b,
         Author = {Casali, Roderic F.},
         Journal = {Chicago Linguistic Society (CLS)},
         Number = {1},
