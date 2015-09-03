@@ -167,7 +167,7 @@
     {\usebibmacro{unified:proc-as-article:maintitle}%
      \newunit\newblock}
   \usebibmacro{unified:proc-as-article:booktitle}%
-  \newunit}
+  \setunit{\addspace}}
 
 \renewbibmacro*{volume+number+eid}{%
   \printfield{volume}%
@@ -489,9 +489,8 @@
      \printfield{version}%
      \newunit\newblock
      \usebibmacro{unified:proc-as-article:maintitle+booktitle}%
-     \newunit\newblock%                          \newblock ensures period before pages
      \usebibmacro{unified:proc-as-article:volume+number+eid}
-     \newunit\newblock%
+     \newunit\newblock%                           \newblock ensures period before pages
      \usebibmacro{note+pages}%
      \newunit\newblock
      \iftoggle{bbx:isbn}
