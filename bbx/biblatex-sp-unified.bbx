@@ -127,10 +127,61 @@
        \setunit{\subtitlepunct}%
        \printfield{journalsubtitle}}}}
 
+% The next three bib macros are for printing the maintitle and booktitle fields
+% of an @inproceedings entry with an ISSN as an article in accordance with the
+% unified style sheet guidelines.
+% 1. maintitle
+\newbibmacro*{unified:proc-as-article:maintitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{maintitle}}
+    and
+    test {\iffieldundef{mainsubtitle}}
+  }
+    {}
+    {\printtext{%
+       \printfield[maintitle]{maintitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[maintitle]{mainsubtitle}}%
+     \newunit}%
+  \printfield{maintitleaddon}}
+
+% 2. booktitle
+\newbibmacro*{unified:proc-as-article:booktitle}{%
+  \ifboolexpr{
+    test {\iffieldundef{booktitle}}
+    and
+    test {\iffieldundef{booksubtitle}}
+  }
+    {}
+    {\printtext{%
+       \printfield[booktitle]{booktitle}%
+       \setunit{\subtitlepunct}%
+       \printfield[booktitle]{booksubtitle}}%
+     \newunit}%
+  \printfield{booktitleaddon}}
+
+% 3. maintitle+booktitle
+\newbibmacro*{unified:proc-as-article:maintitle+booktitle}{%
+  \iffieldundef{maintitle}
+    {}
+    {\usebibmacro{unified:proc-as-article:maintitle}%
+     \newunit\newblock}
+  \usebibmacro{unified:proc-as-article:booktitle}%
+  \newunit}
+
 \renewbibmacro*{volume+number+eid}{%
   \printfield{volume}%
 %  \setunit*{\adddot}%
   \printfield[parens]{number}%        parentheses instead of dot before issue number
+  \setunit{\addcomma\space}%
+  \printfield{eid}}
+
+% This is for printing the volume field of a proceedings with an ISSN as an article
+% in accordance with the unified style sheet guidelines. It depends on the declared
+% field format below.
+\newbibmacro*{unified:proc-as-article:volume+number+eid}{%
+  \printfield[volume:unified:proc-as-article]{volume}%
+  \printfield[parens]{number}%
   \setunit{\addcomma\space}%
   \printfield{eid}}
 
@@ -260,6 +311,10 @@
     {\nolinkurl{http://dx.doi.org/#1}}}
 \DeclareFieldFormat{url}{\url{#1}}
 
+% This is for printing the volume field of a proceedings with an ISSN as an article
+% in accordance with the unified style sheet guidelines
+\DeclareFieldFormat{volume:unified:proc-as-article}{#1}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The bibliography drivers, specifying the formats of each type of entry in the bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -356,106 +411,103 @@
     {}%
   \usebibmacro{finentry}}
 
- \DeclareBibliographyDriver{incollection}{%
-  \usebibmacro{bibindex}%
-  \usebibmacro{begentry}%
-  \usebibmacro{author/translator+others}%
-  \setunit{\labelnamepunct}\newblock
-  \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \ifnameundef{editor}
-    {\setunit{\addspace}}
-    {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
-  \usebibmacro{maintitle+booktitle}%
-  \setunit{\addcomma\space}
-  \printfield{edition}%
-  \setunit{\addcomma\space}
-  \iffieldundef{maintitle}
-    {\printfield{volume}%
-     \printfield{part}}
-    {}%
-  \setunit{\addcomma\space}
-  \printfield{volumes}%
-  \setunit{\addspace}%
-  \usebibmacro{series+number}%
-  \setunit{\addcomma\space}
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
-  \newunit\newblock
-  \iftoggle{bbx:related}
-    {\usebibmacro{related:init}%
-     \usebibmacro{related}}
-    {}%
-  \usebibmacro{finentry}}
+\DeclareBibliographyAlias{incollection}{inproceedings}
 
+% Given the guidelines in the unified style sheet, we should print conference
+% proceedings and working papers as @article's just in case the publication has
+% an ISSN. So, rather than have users handle this in the database by changing the
+% entry type, we can implement this by checking if the inproceedings entry has an
+% ISSN. If the field is undefined, the driver will do what driver did for 
+% @inproceedings entries as of 512f11657199a6044f7663da454f3eac338bdbd5
+% except that \printlist{organization} and \newunit have been removed.
+% On the other hand, if the ISSN field is not undefined, then we will do largely
+% the exact same thing that we do in the @article driver, except that we use the
+% two macros \usebibmacro{unified:proc-as-article:maintitle+booktitle} and 
+% \usebibmacro{unified:proc-as-article:volume+number+eid} instead of
+% \usebibmacro{journal+issuetitle} and except that \usebibmacro{byeditor+others}
+% has been removed so as to ensure that the editors are not listed even if they
+% are present in the database.
 \DeclareBibliographyDriver{inproceedings}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
-  \usebibmacro{author/translator+others}%
-  \setunit{\labelnamepunct}\newblock
-  \usebibmacro{title}%
-  \newunit
-  \printlist{language}%
-  \newunit\newblock
-  \usebibmacro{byauthor}%
-  \newunit\newblock
-  \usebibmacro{in:}%
-  \ifnameundef{editor}
-    {\setunit{\addspace}}
-    {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
-  \usebibmacro{maintitle+booktitle}%
-  \setunit{\addcomma\space}
-  \printfield{edition}%
-  \setunit{\addcomma\space}
-  \iffieldundef{maintitle}
-    {\printfield{volume}%
-     \printfield{part}}
-    {}%
-  \setunit{\addcomma\space}
-  \printfield{volumes}%
-  \setunit{\addspace}%
-  \usebibmacro{series+number}%
-  \setunit{\addcomma\space}
-  \usebibmacro{chapter+pages}%
-  \newunit\newblock
-  \printfield{note}%
-  \newunit\newblock
-  \printlist{organization}%
-  \newunit
-  \usebibmacro{publisher+location+date}%
-  \newunit\newblock
-  \iftoggle{bbx:isbn}
-    {\printfield{isbn}}
-    {}%
-  \newunit\newblock
-  \usebibmacro{doi+eprint+url}%
-  \newunit\newblock
-  \usebibmacro{addendum+pubstate}%
-  \setunit{\bibpagerefpunct}\newblock
-  \usebibmacro{pageref}%
-  \newunit\newblock
-  \iftoggle{bbx:related}
-    {\usebibmacro{related:init}%
-     \usebibmacro{related}}
-    {}%
+  \iffieldundef{issn}
+    {\usebibmacro{author/translator+others}%
+     \setunit{\labelnamepunct}\newblock
+     \usebibmacro{title}%
+     \newunit
+     \printlist{language}%
+     \newunit\newblock
+     \usebibmacro{byauthor}%
+     \newunit\newblock
+     \usebibmacro{in:}%
+     \ifnameundef{editor}
+       {\setunit{\addspace}}
+       {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
+     \usebibmacro{maintitle+booktitle}%
+     \setunit{\addcomma\space}
+     \printfield{edition}%
+     \setunit{\addcomma\space}
+     \iffieldundef{maintitle}
+       {\printfield{volume}%
+        \printfield{part}}
+       {}%
+     \setunit{\addcomma\space}
+     \printfield{volumes}%
+     \setunit{\addspace}%
+     \usebibmacro{series+number}%
+     \setunit{\addcomma\space}
+     \usebibmacro{chapter+pages}%
+     \newunit\newblock
+     \printfield{note}%
+     \newunit\newblock
+     \usebibmacro{publisher+location+date}%
+     \newunit\newblock
+     \iftoggle{bbx:isbn}
+       {\printfield{isbn}}
+       {}%
+     \newunit\newblock
+     \usebibmacro{doi+eprint+url}%
+     \newunit\newblock
+     \usebibmacro{addendum+pubstate}%
+     \setunit{\bibpagerefpunct}\newblock
+     \usebibmacro{pageref}%
+     \newunit\newblock
+     \iftoggle{bbx:related}
+       {\usebibmacro{related:init}%
+        \usebibmacro{related}}
+       {}}
+    {\usebibmacro{author/translator+others}%
+     \setunit{\labelnamepunct}\newblock
+     \usebibmacro{title}%
+     \newunit
+     \printlist{language}%
+     \newunit\newblock
+     \usebibmacro{byauthor}%
+     \newunit\newblock
+     \usebibmacro{bytranslator+others}%
+     \newunit\newblock
+     \printfield{version}%
+     \newunit\newblock
+     \usebibmacro{unified:proc-as-article:maintitle+booktitle}%
+     \newunit\newblock%                          \newblock ensures period before pages
+     \usebibmacro{unified:proc-as-article:volume+number+eid}
+     \newunit\newblock%
+     \usebibmacro{note+pages}%
+     \newunit\newblock
+     \iftoggle{bbx:isbn}
+       {\printfield{issn}}
+       {}%
+     \newunit\newblock
+     \usebibmacro{doi+eprint+url}%
+     \newunit\newblock
+     \usebibmacro{addendum+pubstate}%
+     \setunit{\bibpagerefpunct}\newblock
+     \usebibmacro{pageref}%
+     \newunit\newblock
+     \iftoggle{bbx:related}
+       {\usebibmacro{related:init}%
+        \usebibmacro{related}}
+       {}}
   \usebibmacro{finentry}}
  
 \DeclareBibliographyDriver{thesis}{%
