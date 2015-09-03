@@ -112,7 +112,29 @@ Option 2
 
 NB: The examples included with the Unified Style Sheet do not include the editors of the CLS proceedings volume. We agree with this practice, since the names of editors of such proceedings are often hard to get hold of.
 
-*biblatex-sp-unified*: These guidelines need to be satisfied in the construction of the bib-file. We recommend using the `@article` entry type, putting the conference name (and the acronym in parentheses; no need to case protect the acronym, since journal titles are set as is) in the `journal` field, and do not list the editors. Example:
+*biblatex-sp-unified*: These guidelines need to be satisfied in the construction of the bib-file. There are two approaches, one more of a hack than the other:
+
+*Option 1*: Use the `@inproceedings` entry type and include the ISSN of the proceedings when available. Example:
+
+    @inproceedings{casali:1998,
+        Author = {Casali, Roderic F.},
+        Booktitle = {Chicago Linguistic Society (CLS)},
+        ISSN = 0577-7240,
+        Number = {1},
+        Pages = {55-68},
+        Title = {Predicting {ATR} Activity},
+        Volume = {34},
+        Year = {1998}}
+
+Comment: Following the Unified Style Sheet, we can let the presence of an ISSN control whether an article in conference proceedings is set like a journal article or like a book chapter. To do this, the bib-file needs to contain the ISSN of proceedings where possible. When the ISSN is in the bib-file, biblatex-sp-unified will not print it with the entry but it will trigger setting as an article. If there's no ISSN in the entry, biblatex-sp-unified will set it as a book chapter. The ISSN can be found through [WorldCat](http://www.worldcat.org) fairly easily. Here's a list of common conference proceedings with their ISSN:
+
+* BLS: 0363-2946
+* CLS: 0577-7240
+* NELS: 0883-5500
+* SALT: 2163-5951
+* WCCFL: 1042-1068
+
+*Option 2*: Another option, less portable and definitely a hack, is to use the `@article` entry type, putting the conference name (and the acronym in parentheses; no need to case protect the acronym, since journal titles are set as is) in the `journal` field, and do not list the editors. Example:
 
     @article{casali:1998,
         Author = {Casali, Roderic F.},
