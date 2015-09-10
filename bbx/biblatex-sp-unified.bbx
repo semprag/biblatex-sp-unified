@@ -10,6 +10,18 @@
 \RequireBibliographyStyle{authoryear}
 \ExecuteBibliographyOptions{dashed=false,isbn=false}
 
+% If an @article entry contains Issuetitle and Editor information, we might
+% not want to print it. The Unified Style Sheet does not offer explicit 
+% guidelines on this, but they don't have any examples where either of these
+% pieces of information are actually printed. Therefore, we can offer an option
+% for the user to decide whether to print it. The default will be not to print
+% it since the Unified Style Sheet does not have examples where this information
+% is printed. The user can print it by setting `issueandeditor=true` as a package
+% option when biblatex is called.
+\newtoggle{issueandeditor}
+\DeclareBibliographyOption{issueandeditor}[false]{%
+  \settoggle{issueandeditor}{#1}}
+
 % Formatting directives for name lists
 % ------------------------------------------------------------------
 %
@@ -126,6 +138,30 @@
        \printfield{journaltitle}%
        \setunit{\subtitlepunct}%
        \printfield{journalsubtitle}}}}
+
+\newbibmacro*{journal+issuetitle+editor}{%
+  \usebibmacro{journal}%
+  \setunit*{\addspace}%
+  \iffieldundef{series}
+    {}
+    {\newunit
+     \printfield{series}%
+     \setunit{\addspace}}%
+  \usebibmacro{volume+number+eid}%
+  \iftoggle{issueandeditor}
+    {\setunit{\addspace}%
+     \usebibmacro{issue+date}%
+     \setunit{\addcolon\space}%
+     \usebibmacro{issue}
+     % The following three lines were originally not included inside of
+     % the journal+issuetitle bibmacro. They have been moved inside of
+     % this macro in order to allow them to be controlled by the toggle
+     % `issuetitle` that is defined at the top of this style file.
+     \newunit
+     \usebibmacro{byeditor+others}%
+     \newunit}
+    {}%
+  \newunit}
 
 % The next three bib macros are for printing the maintitle and booktitle fields
 % of an @inproceedings entry with an ISSN as an article in accordance with the
@@ -340,11 +376,9 @@
   \newunit\newblock
   \printfield{version}%
   \newunit\newblock
-%  \usebibmacro{in:}%                         We don't use "In: " before journal titles
-  \usebibmacro{journal+issuetitle}%
-  \newunit
-  \usebibmacro{byeditor+others}%
-  \newunit\newblock%                          \newblock ensures period before pages
+% \usebibmacro{in:}%                         We don't use "In: " before journal titles
+  \usebibmacro{journal+issuetitle+editor}%
+  \newblock%                          \newblock ensures period before pages
   \usebibmacro{note+pages}%
   \newunit\newblock
   \iftoggle{bbx:isbn}
