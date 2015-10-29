@@ -266,21 +266,21 @@
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
-  {\printtext[bibhyperref]{\printfield{year}\printfield{extrayear}}}
+  {\printtext[bibhyperref]{\iffieldundef{year}{\printfield{labelyear}}{\printfield{year}}\printfield{extrayear}}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
 
 \DeclareCiteCommand{\posscitet}
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}}
-  {\printtext[bibhyperref]{\printnames{labelname}'s \printtext[parens]{\printfield{year}\printfield{extrayear}}}}
+  {\printtext[bibhyperref]{\printnames{labelname}'s \printtext[parens]{\iffieldundef{year}{\printfield{labelyear}}{\printfield{year}}\printfield{extrayear}}}}
   {}
   {}
 
 \DeclareCiteCommand{\posscitealt}
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}}
-  {\printtext[bibhyperref]{\printnames{labelname}'s \printfield{year}\printfield{extrayear}}}
+  {\printtext[bibhyperref]{\printnames{labelname}'s \iffieldundef{year}{\printfield{labelyear}}{\printfield{year}}\printfield{extrayear}}}
   {}
   {}
 
