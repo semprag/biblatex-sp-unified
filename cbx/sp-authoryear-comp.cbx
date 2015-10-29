@@ -258,7 +258,7 @@
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
    \usebibmacro{prenote}}
-  {\printtext[bibhyperref]{\printfield{year}\printfield{extrayear}}}
+  {\printtext[bibhyperref]{\iffieldundef{year}{\printfield{labelyear}}{\printfield{year}}\printfield{extrayear}}}
   {\multicitedelim}
   {\usebibmacro{postnote}}
   
