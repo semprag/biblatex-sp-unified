@@ -8,7 +8,7 @@
 % biblatex by default calls biblatex.def, we add to this authoryear.bbx, which in turn loads standard.bbx. So, sp-biblatex.bbx is built on top of those styles; once authoryear.bbx is loaded, we tell it not to put in dashes for repeated authors (in accordance with the Unified Stylesheet)
 
 \RequireBibliographyStyle{authoryear}
-\ExecuteBibliographyOptions{dashed=false,isbn=false}
+\ExecuteBibliographyOptions{dashed=false,isbn=false,eprint=false}
 
 % If an @article entry contains Issuetitle and Editor information, we might
 % not want to print it. The Unified Style Sheet does not offer explicit
