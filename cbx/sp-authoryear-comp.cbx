@@ -249,6 +249,10 @@
 \newcommand{\secposscitet}[2]{\citeauthor{#1}'s (\citeyear{#1}:~$\S$#2)}
 \let\citep\parencite
 
+\renewcommand*{\postnotedelim}{\addcolon\space}
+\DeclareFieldFormat{postnote}{#1}
+\DeclareFieldFormat{multipostnote}{#1}
+
 \DeclareCiteCommand{\citeauthor}
   {\boolfalse{citetracker}%
    \boolfalse{pagetracker}%
