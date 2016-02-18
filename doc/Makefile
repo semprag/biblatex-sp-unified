@@ -4,4 +4,3 @@ all: unified-test.pdf
 	pdflatex $*
 	biber $*
 	pdflatex $*
-	pdflatex $*
