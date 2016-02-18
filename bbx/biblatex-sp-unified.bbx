@@ -11,7 +11,7 @@
 \ExecuteBibliographyOptions{dashed=false,isbn=false}
 
 % If an @article entry contains Issuetitle and Editor information, we might
-% not want to print it. The Unified Style Sheet does not offer explicit 
+% not want to print it. The Unified Style Sheet does not offer explicit
 % guidelines on this, but they don't have any examples where either of these
 % pieces of information are actually printed. Therefore, we can offer an option
 % for the user to decide whether to print it. The default will be not to print
@@ -33,7 +33,7 @@
 
 % The macros here get 4 arguments passed to them. They are: #1 last name, #2 first name, #3 von, #4 Jr.
 
-\renewbibmacro*{name:last}[4]{%				
+\renewbibmacro*{name:last}[4]{%
      \usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
      \ifblank{#3}
@@ -43,12 +43,12 @@
           {\mkbibnameprefix{#3}\isdot}%
         \ifpunctmark{'}{}{\bibnamedelimc}}%
   \mkbibnamelast{#1}}%
-  
-\renewbibmacro*{name:last-first}[4]{%      
+
+\renewbibmacro*{name:last-first}[4]{%
      \usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
      \ifblank{#3}{}{%
-	   \mkbibnameprefix{#3}\isdot%
+       \mkbibnameprefix{#3}\isdot%
        \ifpunctmark{'}{}{\bibnamedelimc}}%
      \mkbibnamelast{#1}\isdot
      \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibnamefirst{#2}\isdot}%
@@ -222,7 +222,7 @@
   \printfield{eid}}
 
 % Because of the weird format "3 May, 2007" specified in the Unified Stylesheet for URL access dates, we need a special way to format the urldate
-  
+
 \newcommand{\mkbibdateunified}[3]{% Year-Month-Day as input --> xx Month, Year
   \iffieldundef{#3}
     {}
@@ -240,13 +240,13 @@
            {,}%
          \space\stripzeros{\thefield{#1}}}%
     }%
-  }% 
+  }%
 
 \renewbibmacro*{url+urldate}{%
   \printfield{url}%
   \iffieldundef{urlyear}%
-  	{}%
-  	{\setunit*{\addspace}%
+    {}%
+    {\setunit*{\addspace}%
      \printtext[parens]{\mkbibdateunified{urlyear}{urlmonth}{urlday}}}%
   }
 
@@ -317,12 +317,12 @@
 
 % This gets rid of the Oxford comma in name lists and uses the ampersand rather than "and":
 
-\renewcommand*{\finalnamedelim}{\addspace\&\addspace}     
-\renewcommand*{\finallistdelim}{\addspace\&\addspace}   
+\renewcommand*{\finalnamedelim}{\addspace\&\addspace}
+\renewcommand*{\finallistdelim}{\addspace\&\addspace}
 
 % no colon after "In" in incollection entries (overriding biblatex.def):
 
-\renewcommand{\intitlepunct}{\addspace}  
+\renewcommand{\intitlepunct}{\addspace}
 
 \renewcommand{\subtitlepunct}{\addcolon\space}
 \renewcommand*{\bibpagespunct}{\newunitpunct}  % No comma before pages, just the usual new unit period
@@ -357,7 +357,7 @@
 
 %%% First, the entry types used in the Unified Test Bibliography. Could rely on standard.bbx for all others as a fallback.
 
-% For the article type, the only departure from standard.bbx is that 
+% For the article type, the only departure from standard.bbx is that
 % we don't use a literal "In: " before the journal title; other formatting
 % departures are done in the format specs and bibmacros
 
@@ -451,12 +451,12 @@
 % proceedings and working papers as @article's just in case the publication has
 % an ISSN. So, rather than have users handle this in the database by changing the
 % entry type, we can implement this by checking if the inproceedings entry has an
-% ISSN. If the field is undefined, the driver will do what driver did for 
+% ISSN. If the field is undefined, the driver will do what driver did for
 % @inproceedings entries as of 512f11657199a6044f7663da454f3eac338bdbd5
 % except that \printlist{organization} and \newunit have been removed.
 % On the other hand, if the ISSN field is not undefined, then we will do largely
 % the exact same thing that we do in the @article driver, except that we use the
-% two macros \usebibmacro{unified:proc-as-article:maintitle+booktitle} and 
+% two macros \usebibmacro{unified:proc-as-article:maintitle+booktitle} and
 % \usebibmacro{unified:proc-as-article:volume+number+eid} instead of
 % \usebibmacro{journal+issuetitle} and except that \usebibmacro{byeditor+others}
 % has been removed so as to ensure that the editors are not listed even if they
@@ -542,7 +542,7 @@
         \usebibmacro{related}}
        {}}
   \usebibmacro{finentry}}
- 
+
 \DeclareBibliographyDriver{thesis}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -608,4 +608,3 @@
      \usebibmacro{related}}
     {}%
   \usebibmacro{finentry}}
-	

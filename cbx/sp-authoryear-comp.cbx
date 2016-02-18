@@ -14,7 +14,7 @@
     {\iffieldundef{prenote}
        {}
        {\global\undef\cbx@lasthash
-	\global\undef\cbx@lastyear}}}
+        \global\undef\cbx@lastyear}}}
 
 \newbibmacro*{cite:reinit}{%
   \global\undef\cbx@lasthash
@@ -153,12 +153,12 @@
     {\setunit{}%
      \printtext{%
        \ifbool{cbx:parens}
-	 {\bibcloseparen\global\boolfalse{cbx:parens}}
-	 {}}}
+         {\bibcloseparen\global\boolfalse{cbx:parens}}
+         {}}}
     {\setunit{%
        \ifbool{cbx:parens}
-	 {\bibcloseparen\global\boolfalse{cbx:parens}}
-	 {}%
+         {\bibcloseparen\global\boolfalse{cbx:parens}}
+         {}%
        \multicitedelim}}}
 
 \DeclareCiteCommand{\cite}
