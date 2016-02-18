@@ -3,25 +3,31 @@ biblatex-sp-unified
 
 An opinionated BibLaTeX implementation of the Unified Stylesheet for Linguistics Journals
 
-# Introduction #
+## Introduction
 
-`biblatex-sp-unified` is an opionated implementation in BibLaTeX of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/). There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics (S&P)*](http://semprag.org).
+`biblatex-sp-unified` is an opinionated implementation in BibLaTeX of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/). There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics (S&P)*](http://semprag.org).
 
 The current project is a ground-up re-implementation in modern BibLaTeX. It is now being used by *S&P* for its articles.
 
-# Installation and use
+## Installation and use
 
-The `biblatex-sp-unified` style consists of two files: `biblatex-sp-unified.bbx` (which contains the bibliography formatting code) and, `sp-authoryear-comp.cbx` (which contains the code for formatting in-text citations in the style of *S&P*; since the Unified Stylesheet does not give any guidelines of in-text citations, this file is optional and users can choose other citation styles). These should be put somewhere where your TeX system can find them (perhaps, `~/Library/texmf/tex/latex/biblatex/{bbx,cbx}/`.
+The `biblatex-sp-unified` style consists of two files: `biblatex-sp-unified.bbx` (which contains the bibliography formatting code) and, `sp-authoryear-comp.cbx` (which contains the code for formatting in-text citations in the style of *S&P*; since the Unified Stylesheet does not give any guidelines of in-text citations, this file is optional and users can choose other citation styles).
 
-The style depends on a modern TeX installation that includes biblatex 2.0+. It is tested only with the biber backend.
+These two files should be put somewhere where your TeX system can find them.
+For example, if you are using the MacTeX distribution on OS X, they would be belong at:
 
-To use the style in conjunction with sp.cls, you have to do two things:
+    ~/Library/texmf/tex/latex/biblatex/bbx/biblatex-sp-unified.bbx
+    ~/Library/texmf/tex/latex/biblatex/cbx/sp-authoryear-comp.cbx
 
-1. include the class option 'biblatex' when calling sp.cls:
+Compiling LaTeX documents with this style depends on a modern TeX installation that includes biblatex 2.0+. It is tested only with the biber backend.
 
-    `\documentclass[biblatex]{sp.cls}`
-    
-2. include a line in your preamble that loads your bib-file:
+To use the style in conjunction with `sp.cls`, you have to do two things:
+
+1. Include the class option 'biblatex' when importing `sp.cls`:
+
+    `\documentclass[biblatex]{sp}`
+
+2. Include a line in your preamble that loads your bib-file:
 
     `\addbibresource{your-bib-database.bib}`
 
@@ -38,5 +44,5 @@ You can use the style with other document classes as well. In that case, replace
             citestyle=sp-authoryear-comp,
             maxcitenames=3,
             maxbibnames=99]{biblatex}
-            
-Full documentation of the design choices can be found in doc/DOCUMENTATION.md.
+
+Full documentation of the design choices can be found in [doc/DOCUMENTATION.md](doc/DOCUMENTATION.md).
