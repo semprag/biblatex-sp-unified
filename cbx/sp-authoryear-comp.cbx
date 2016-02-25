@@ -68,7 +68,7 @@
      \usebibmacro{cite:reinit}}%
   \setunit{\multicitedelim}}
 
-\renewbibmacro*{textcite}{% Based on textcite bib macro from authoryear-comp.cbx
+\newbibmacro*{textcite}{% Based on textcite bib macro from authoryear-comp.cbx
   \iffieldequals{namehash}{\cbx@lasthash}
     {\iffieldundef{shorthand}
        {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
