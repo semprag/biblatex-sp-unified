@@ -20,6 +20,15 @@
   \global\undef\cbx@lasthash
   \global\undef\cbx@lastyear}
 
+\newbibmacro*{labelyearrepeat}{%
+  \ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
+              \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
+    {\setunit{\addcomma}%
+     \usebibmacro{cite:extrayear}}
+    {\setunit{\compcitedelim}%
+     \usebibmacro{cite:labelyear+extrayear}%
+     \savefield{labelyear}{\cbx@lastyear}}}
+
 \newbibmacro*{cite}{% Based on cite bib macro from authoryear-comp.cbx
   \iffieldundef{shorthand}
     {\ifthenelse{\ifnameundef{labelname}\OR\iffieldundef{labelyear}}
@@ -30,13 +39,7 @@
           \usebibmacro{cite:labelyear+extrayear}}%
           \usebibmacro{cite:reinit}}
        {\iffieldequals{namehash}{\cbx@lasthash}
-          {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
-                       \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
-             {\setunit{\addcomma}%
-              \usebibmacro{cite:extrayear}}
-             {\setunit{\compcitedelim}%
-              \usebibmacro{cite:labelyear+extrayear}%
-              \savefield{labelyear}{\cbx@lastyear}}}
+          {\usebibmacro{labelyearrepeat}}
           {\printtext[bibhyperref]{% Include labelname in hyperlink
              \DeclareFieldAlias{bibhyperref}{default}% Prevent nested hyperlinks
              \printnames{labelname}%
@@ -54,13 +57,7 @@
        {\usebibmacro{cite:label}%
         \usebibmacro{cite:reinit}}
        {\iffieldequals{namehash}{\cbx@lasthash}
-          {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
-                       \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
-             {\setunit{\addcomma}%
-              \usebibmacro{cite:extrayear}}
-             {\setunit{\compcitedelim}%
-              \usebibmacro{cite:labelyear+extrayear}%
-              \savefield{labelyear}{\cbx@lastyear}}}
+          {\usebibmacro{labelyearrepeat}}
           {\usebibmacro{cite:labelyear+extrayear}%
            \savefield{namehash}{\cbx@lasthash}%
            \savefield{labelyear}{\cbx@lastyear}}}}
@@ -71,13 +68,7 @@
 \newbibmacro*{textcite}{% Based on textcite bib macro from authoryear-comp.cbx
   \iffieldequals{namehash}{\cbx@lasthash}
     {\iffieldundef{shorthand}
-       {\ifthenelse{\iffieldequals{labelyear}{\cbx@lastyear}\AND
-                    \(\value{multicitecount}=0\OR\iffieldundef{postnote}\)}
-          {\setunit{\addcomma}%
-           \usebibmacro{cite:extrayear}}
-          {\setunit{\compcitedelim}%
-           \usebibmacro{cite:labelyear+extrayear}%
-           \savefield{labelyear}{\cbx@lastyear}}}
+       {\usebibmacro{labelyearrepeat}}
        {\setunit{\compcitedelim}%
         \usebibmacro{cite:shorthand}%
         \global\undef\cbx@lastyear}}
