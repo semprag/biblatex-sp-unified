@@ -33,6 +33,10 @@
 
 % The macros here get 4 arguments passed to them. They are: #1 last name, #2 first name, #3 von, #4 Jr.
 
+% In biblatex v3.3 and onwards, the name formatting has changed in a big way. See for example: http://tex.stackexchange.com/questions/299036/biblatex-3-3-name-formatting, https://github.com/plk/biblatex/issues/372, and http://www.texdev.net/2016/03/13/biblatex-a-new-syntax-for-declarenameformat/. The name formats in biblatex.def are not called first-last etc. anymore but given-family etc. And while there are safeguard legacy aliases (\DeclareNameAlias{first-last}{given-family}, for example), the new formats then use macros like \usebibmacro{name:family-given}, which of course our old redefinitions didn't adjust. So, for newer biblatex, we need to do new versions of \renewbibmacro{name:...}.
+
+%% Redefinitions of name:last and name:last-first for old biblatex
+
 \renewbibmacro*{name:last}[4]{%
      \usebibmacro{name:delim}{#3#1}%
      \usebibmacro{name:hook}{#3#1}%
@@ -53,6 +57,29 @@
      \mkbibnamelast{#1}\isdot
      \ifblank{#2}{}{\addcomma\bibnamedelimd\mkbibnamefirst{#2}\isdot}%
      \ifblank{#4}{}{\addcomma\bibnamedelimd\mkbibnameaffix{#4}\isdot}}
+
+%% Redefinitions of name:family and name:family-given for new biblatex
+
+\renewbibmacro*{name:family}[4]{%
+  \usebibmacro{name:delim}{#3#1}%
+     \usebibmacro{name:hook}{#3#1}%
+     \ifdefvoid{#3}
+       {}
+       {\ifcapital
+          {\mkbibnameprefix{\MakeCapital{#3}}\isdot}
+          {\mkbibnameprefix{#3}\isdot}%
+        \ifprefchar{}{\bibnamedelimc}}
+  \mkbibnamefamily{#1}\isdot}%
+
+\renewbibmacro*{name:family-given}[4]{%
+  \usebibmacro{name:delim}{#3#1}%
+     \usebibmacro{name:hook}{#3#1}%
+     \ifdefvoid{#3}{}{%
+       \mkbibnameprefix{#3}\isdot
+       \ifprefchar{}{\bibnamedelimc}}%
+     \mkbibnamefamily{#1}\isdot
+     \ifdefvoid{#4}{}{\bibnamedelimd\mkbibnamesuffix{#4}\isdot}%
+     \ifdefvoid{#2}{}{\revsdnamepunct\bibnamedelimd\mkbibnamegiven{#2}\isdot}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Various bibmacros used in producing the bibliography
