@@ -3,7 +3,16 @@
 % NB: The Unified Style Sheet wants abbreviated "ed(s)", "edn". But using the abbreviate option also abbreviates the names of months. But then dateabbrev=false restores the long names of months
 % biblatex has a "useprefix" option, which makes "von" count for alphabetization; the Unified Stylesheet does not want that, so it is important that this option be disabled (even if an author tries to set it to true)
 
-\ExecuteBibliographyOptions{labeldateparts,sorting=nyt,abbreviate,dateabbrev=false,useprefix=false}
+% For backward compatibility: as of biblatex 3.5 (2016/19/10), labeldateparts must be used instead of labeldate
+\@ifpackagelater{biblatex}{2016/09/09}
+{%
+  \ExecuteBibliographyOptions{labeldateparts}
+}
+{%
+  \ExecuteBibliographyOptions{labeldate}
+}%
+
+\ExecuteBibliographyOptions{sorting=nyt,abbreviate,dateabbrev=false,useprefix=false}
 
 % biblatex by default calls biblatex.def, we add to this authoryear.bbx, which in turn loads standard.bbx. So, sp-biblatex.bbx is built on top of those styles; once authoryear.bbx is loaded, we tell it not to put in dashes for repeated authors (in accordance with the Unified Stylesheet)
 

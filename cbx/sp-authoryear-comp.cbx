@@ -1,7 +1,15 @@
 \ProvidesFile{sp-authoryear-comp.cbx}
 
-\ExecuteBibliographyOptions{labeldateparts,uniquename,uniquelist,autocite=inline}
-% disabled sortcites option, since it was sorting by name, instead of
+% For backward compatibility: as of biblatex 3.5 (2016/19/10), labeldateparts must be used instead of labeldate
+\@ifpackagelater{biblatex}{2016/09/09}
+{%
+  \ExecuteBibliographyOptions{labeldateparts}
+}
+{%
+  \ExecuteBibliographyOptions{labeldate}
+}%
+
+\ExecuteBibliographyOptions{uniquename,uniquelist,autocite=inline}% disabled sortcites option, since it was sorting by name, instead of
 % year, and we often want to keep citations in the order chosen by the
 % author
 \newbool{cbx:parens}
