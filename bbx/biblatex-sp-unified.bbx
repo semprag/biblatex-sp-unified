@@ -360,7 +360,7 @@
 }
 
 % basically everything is in sentence case, other than journals and book series (recurring titles)
-\DeclareFieldFormat[article,book,thesis,incollection,unpublished,inproceedings]{titlecase}{\MakeSentenceCase*{#1}}%
+\DeclareFieldFormat[article,book,collection,incollection,inproceedings,thesis,unpublished]{titlecase}{\MakeSentenceCase*{#1}}%
 
 % No quotes around titles
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
