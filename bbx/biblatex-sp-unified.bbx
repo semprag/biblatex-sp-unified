@@ -389,6 +389,24 @@
 % in accordance with the unified style sheet guidelines
 \DeclareFieldFormat{volume:unified:proc-as-article}{#1}
 
+% Print LingBuzz entries using an eprint field
+\DeclareFieldFormat{eprint:lingbuzz}{%
+  LingBuzz\addcolon\space
+  \ifhyperref
+    {\href{http://ling.auf.net/lingbuzz/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}
+}
+\DeclareFieldAlias{eprint:LingBuzz}{eprint:lingbuzz}
+
+% Print Rutgers Optimality Archive entries using an eprint field
+\DeclareFieldFormat{eprint:roa}{%
+  ROA\addcolon\space
+  \ifhyperref
+    {\href{http://roa.rutgers.edu/article/view/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}
+}
+\DeclareFieldAlias{eprint:ROA}{eprint:roa}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The bibliography drivers, specifying the formats of each type of entry in the bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
