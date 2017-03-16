@@ -371,8 +371,8 @@
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
 \DeclareFieldFormat{doi}{%
   \ifhyperref
-    {\href{http://dx.doi.org/#1}{\nolinkurl{http://dx.doi.org/#1}}}
-    {\nolinkurl{http://dx.doi.org/#1}}}
+    {\href{http://doi.org/#1}{\nolinkurl{http://doi.org/#1}}}
+    {\nolinkurl{http://doi.org/#1}}}
 \DeclareFieldFormat{url}{\url{#1}}
 
 % This is for printing the volume field of a proceedings with an ISSN as an article
