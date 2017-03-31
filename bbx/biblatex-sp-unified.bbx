@@ -1,4 +1,4 @@
-\ProvidesFile{sp-biblatex.bbx}
+\ProvidesFile{biblatex-sp-unified.bbx}
 
 % NB: The Unified Style Sheet wants abbreviated "ed(s)", "edn". But using the abbreviate option also abbreviates the names of months. But then dateabbrev=false restores the long names of months
 % biblatex has a "useprefix" option, which makes "von" count for alphabetization; the Unified Stylesheet does not want that, so it is important that this option be disabled (even if an author tries to set it to true)
@@ -370,7 +370,7 @@
 }
 
 % basically everything is in sentence case, other than journals and book series (recurring titles)
-\DeclareFieldFormat[article,book,thesis,incollection,unpublished,inproceedings]{titlecase}{\MakeSentenceCase*{#1}}%
+\DeclareFieldFormat[article,book,collection,incollection,inproceedings,thesis,unpublished]{titlecase}{\MakeSentenceCase*{#1}}%
 
 % No quotes around titles
 \DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{#1}
@@ -482,6 +482,9 @@
      \usebibmacro{related}}
     {}%
   \usebibmacro{finentry}}
+
+% Aliased to ensure no period between the title and the series.
+\DeclareBibliographyAlias{collection}{book}
 
 \DeclareBibliographyAlias{incollection}{inproceedings}
 
