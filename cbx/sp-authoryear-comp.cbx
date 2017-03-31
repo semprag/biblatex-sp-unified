@@ -1,6 +1,16 @@
 \ProvidesFile{sp-authoryear-comp.cbx}
 
-\ExecuteBibliographyOptions{labeldateparts,uniquename=minfull,uniquelist=minyear,autocite=inline}
+% For backward compatibility: choose labeldate or labeldateparts depending on the biblatex version 
+\@ifpackagelater{biblatex}{2016/09/09}
+{%
+  \ExecuteBibliographyOptions{labeldateparts} % as of biblatex 3.5 (2016/09/10)
+}
+{%
+  \ExecuteBibliographyOptions{labeldate}
+}%
+
+\ExecuteBibliographyOptions{uniquename=minfull,uniquelist=minyear,autocite=inline}
+
 % disabled sortcites option, since it was sorting by name, instead of
 % year, and we often want to keep citations in the order chosen by the
 % author
