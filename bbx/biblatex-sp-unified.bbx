@@ -95,7 +95,7 @@
 % Various bibmacros used in producing the bibliography
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\renewbibmacro*{date+extrayear}{%
+\renewbibmacro*{date+extradate}{%
   \iffieldundef{labelyear}
     {}
     {\printtext{\printlabeldateextra}}}%     Took out the parentheses around the year
@@ -120,7 +120,7 @@
     {\global\undef\bbx@lasthash
      \usebibmacro{labeltitle}%
      \newunit}%                               period instead of space
-  \usebibmacro{date+extrayear}}
+  \usebibmacro{date+extradate}}
 
 \renewbibmacro*{editor}{%
   \usebibmacro{bbx:editor}{editorstrg}}
@@ -143,7 +143,7 @@
     {\global\undef\bbx@lasthash
      \usebibmacro{labeltitle}%
      \newunit}%                                         period instead of space
-  \usebibmacro{date+extrayear}}
+  \usebibmacro{date+extradate}}
 
 \renewbibmacro*{translator}{%
   \usebibmacro{bbx:translator}{translatorstrg}}
@@ -166,7 +166,7 @@
     {\global\undef\bbx@lasthash
      \usebibmacro{labeltitle}%
      \newunit}%                                     period instead of space
-  \usebibmacro{date+extrayear}}
+  \usebibmacro{date+extradate}}
 
 \renewbibmacro*{journal}{%
   \iffieldundef{journaltitle}
