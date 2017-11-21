@@ -68,3 +68,11 @@ You can use the style with other document classes as well. In that case, replace
                 maxbibnames=99]{biblatex}
 
 Full documentation of the design choices can be found in [doc/DOCUMENTATION.md](doc/DOCUMENTATION.md).
+
+
+## Testing
+
+Testing consists of rendering `unified-test.tex` (and `unified-test.bib`) into a PDF, converting to plain text, then comparing to a static file containing the expected output (`test/unified-test.expected.md`)[test/unified-test.expected.md].
+The various steps are specified in the [`Makefile`](Makefile).
+
+    make test
