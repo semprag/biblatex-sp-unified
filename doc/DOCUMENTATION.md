@@ -1,49 +1,7 @@
 biblatex-sp-unified
 ===================
 
-An opinionated BibLaTeX implementation of the Unified Stylesheet for Linguistics Journals
-
-# Warning #
-
-This distribution is at best in the alpha stage. Use at your own risk and please file a github "issue" to let me know of any problems you encounter and any recommendations for improvement.
-
-# Introduction #
-
-`biblatex-sp-unified` is an opinionated implementation in BibLaTeX of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/). There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics (S&P)*](http://semprag.org).
-
-The current project is a ground-up re-implementation in modern BibLaTeX. It is now being used by *S&P* for its articles.
-
-# Installation and use
-
-The `biblatex-sp-unified` style consists of two files: `biblatex-sp-unified.bbx` (which contains the bibliography formatting code) and `sp-authoryear-comp.cbx` (which contains the code for formatting in-text citations in the style of *S&P*; since the Unified Stylesheet does not give any guidelines of in-text citations, this file is optional and users can choose other citation styles). These should be put somewhere where your TeX system can find them (perhaps, `~/Library/texmf/tex/latex/biblatex/{bbx,cbx}/`.
-
-The style depends on a modern TeX installation that includes biblatex 2.0+. It is tested only with the biber backend.
-
-To use the style in conjunction with sp.cls, you have to do two things:
-
-1. include the class option 'biblatex' when calling sp.cls:
-
-    `\documentclass[biblatex]{sp.cls}`
-
-2. include a line in your preamble that loads your bib-file:
-
-    `\addbibresource{your-bib-database.bib}`
-
-   NB: the suffix `.bib` needs to be included (this is different from bibtex)
-
-3. Finally, replace the `\bibliography` line in the backmatter with the following:
-
-    `\printbibliography`
-
-You can use the style with other document classes as well. In that case, replace step 1 above with the following lines in your preamble:
-
-    \usepackage[backend=biber,
-            bibstyle=biblatex-sp-unified,
-            citestyle=sp-authoryear-comp,
-            maxcitenames=3,
-            maxbibnames=99]{biblatex}
-
-# Implementing the Unified Style Sheet for Linguistics Journals
+## Implementing the Unified Style Sheet for Linguistics Journals
 
 `biblatex-sp-unified` is meant to implement as fully as possible the [Unified Style Sheet for Linguistics Journals](http://celxj.org/downloads/UnifiedStyleSheet.pdf). It consists of a number of guidelines and thoughts on the formatting of bibliographies, a sample bibliography and some comments on that sample.
 
@@ -99,8 +57,8 @@ Option 2
 >9\. **Parentheses around ed. makes sense.** Commas and periods should be used exclusively to separate citation components (e.g., "Author. Year."), or subcomponents (e.g. "author1, author2 & author3). Since "ed." is neither a component nor a subcomponent, but a modifier of a component, it should not be separated from the name by a comma:
 
 >    surname, firstname = author
-     surname, firstname (ed.). = editor (NOT surname, firstname, ed.)
-     surname, firstname & firstname surname (eds.) = editors
+>    surname, firstname (ed.). = editor (NOT surname, firstname, ed.)
+>    surname, firstname & firstname surname (eds.) = editors
 
 `biblatex-sp-unified`: The style complies with the Unified Style Sheet.
 
@@ -188,7 +146,8 @@ NB: biblatex-sp-unified is the only BibLaTeX style that we know of that implemen
 
 `biblatex-sp-unified`: We take it that this does not refer to material that has officially been published online, in which case permanent document identifiers such as DOIs and the like will take care of the linking requirements. Rather, we are assuming this refers to "unpublished" material available online (on author's homepages or repositories such as the Semantics Archive or LingBuzz). In this case, just use the `@unpublished` entry-type, give the URL in the `url = {}` field, and if deemed necessary include the date the material was accessed by adding an `urldate = {}` field. The date should be given in YYYY-MM-DD format, e.g. `urldate = {2013-08-11}`. The style will then add the date in parentheses, formatted to the style sheet's rather odd format.
 
-# Departures from the Unified Style Sheet #
+
+## Departures from the Unified Style Sheet
 
 We already mentioned our one major disagreement with the Unified Style Sheet: the incorrect treatment of the "von" part of names.
 
@@ -199,7 +158,8 @@ We depart from the style sheet only in a few other places. These are actually on
 3. In the one case of an online journal article, the Pedersen 2005 entry, the example has a comma between the journal + volume and the URL. We think that this is analogous to the break between journal + volume(issue) and page numbers, and so it should be a period instead of a comma. That is what `biblatex-sp-unified` does.
 4. There is a period between the URL and the URL access date (which is in parentheses). We do not think that this period should be there. `biblatex-sp-unified` has a space.
 
-# Guidelines for the preparation of bib files
+
+## Guidelines for the preparation of bib files
 
 For convenience, we repeat the best practices for preparing your bib file for use with `biblatex-sp-unified`.
 
