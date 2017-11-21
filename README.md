@@ -21,7 +21,8 @@ These two files should be put somewhere where your TeX system can find them; for
 And then copy/download each file into that directory:
 
     cd $_
-    wget https://raw.githubusercontent.com/semprag/biblatex-sp-unified/master/{bbx/biblatex-sp-unified.bbx,cbx/sp-authoryear-comp.cbx}
+    wget https://raw.githubusercontent.com/semprag/biblatex-sp-unified/master/bbx/biblatex-sp-unified.bbx
+    wget https://raw.githubusercontent.com/semprag/biblatex-sp-unified/master/cbx/sp-authoryear-comp.cbx
 
 If you are using the MacTeX distribution on macOS, you will end up with a file structure that looks like this:
 
