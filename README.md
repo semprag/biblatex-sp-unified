@@ -30,6 +30,14 @@ If you are using the MacTeX distribution on macOS, you will end up with a file s
     ~/Library/texmf/tex/latex/biblatex/sp-authoryear-comp.cbx
 
 
+## Backward compatibility
+
+This repository's tags correspond to supported BibLaTeX versions.
+If you have BibLaTeX `3.8` (or `3.8a`), you should use `biblatex-sp-unified@3.8.x` where `x` is the latest value in the series.
+
+You can check which version of BibLaTeX you have by running `tlmgr info biblatex --only-installed --data cat-version` at the command line.
+
+
 ## Requirements
 
 Compiling LaTeX documents with this style depends on a modern TeX installation that includes BibLaTeX 2.0+.
