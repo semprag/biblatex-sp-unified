@@ -43,7 +43,7 @@ You can check which version of BibLaTeX you have by running `tlmgr info biblatex
 Compiling LaTeX documents with this style depends on a modern TeX installation that includes BibLaTeX 2.0+.
 It is tested only with the `biber` backend.
 
-To use the style in conjunction with *S&P*'s [`sp.cls`](https://raw.githubusercontent.com/semprag/tex/master/sp.cls), you have to do two things:
+To use the style in conjunction with *S&P*'s [`sp.cls`](https://raw.githubusercontent.com/semprag/tex/master/sp.cls), you have to do three things:
 
 1. Include the class option 'biblatex' when importing `sp.cls`:
 
