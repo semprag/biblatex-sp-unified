@@ -1,0 +1,5 @@
+#!/bin/bash
+# Use this file (on a unix system) to generate the zip archive for CTAN
+#
+ctanify --pkgname=biblatex-sp-unified --noauto README.md "LICENSE=source/tex/latex/biblatex-sp-unified" "doc/DOCUMENTATION.md=doc/latex/biblatex-sp-unified" "bbx/biblatex-sp-unified.bbx=tex/latex/biblatex-sp-unified" "cbx/sp-authoryear-comp.cbx=tex/latex/biblatex-sp-unified" "test/*=doc/latex/biblatex-sp-unified"
+
