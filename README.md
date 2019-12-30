@@ -1,7 +1,7 @@
-biblatex-sp-unified
-===================
+biblatex-unified
+================
 
-`biblatex-sp-unified` is an opinionated BibLaTeX implementation of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf).
+`biblatex-unified` is an opinionated BibLaTeX implementation of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf).
 The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/).
 There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*).
 
@@ -14,10 +14,10 @@ Please [file an issue](https://github.com/semprag/biblatex-sp-unified/issues/new
 
 ## Sources
 
-The `biblatex-sp-unified` style consists of two files:
+The `biblatex-unified` style consists of two files:
 
-* [`biblatex-sp-unified.bbx`](bbx/biblatex-sp-unified.bbx) -- for formatting the bibliography.
-* [`sp-authoryear-comp.cbx`](cbx/sp-authoryear-comp.cbx) -- for formatting in-text citations in the style of *S&P*.
+* [`unified.bbx`](unified.bbx) -- for formatting the bibliography.
+* [`unified.cbx`](unified.cbx) -- for formatting in-text citations in the style of *S&P*.
   - Since the Unified Stylesheet does not give any guidelines for in-text citations, this file is optional and users can choose other citation styles.
 
 
