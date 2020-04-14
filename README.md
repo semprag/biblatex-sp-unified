@@ -1,9 +1,9 @@
 biblatex-sp-unified
 ===================
 
-`biblatex-sp-unified` is an opinionated BibLaTeX implementation of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf).
-The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/).
-There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*).
+`biblatex-sp-unified` is an opinionated BibLaTeX implementation of the [Unified Stylesheet for Linguistics Journal](https://www.linguisticsociety.org/sites/default/files/style-sheet_0.pdf).
+The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](https://www.linguisticsociety.org/celxj).
+There is a standard BibTeX implementation, called [`unified.bst`](http://mirror.las.iastate.edu/tex-archive/macros/latex/contrib/msu-thesis/samples/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*).
 
 This project is a ground-up re-implementation in modern BibLaTeX. It is now being used by *S&P* in production.
 
