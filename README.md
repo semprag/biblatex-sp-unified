@@ -63,8 +63,7 @@ simply add the `biblatex` class option when importing `sp.cls`:
 If you are not using the `S&P` document class, you can still use this style by adding the following to your preamble (after `\documentclass{...}` but before `\begin{document}`):
 
     \usepackage[backend=biber,
-                bibstyle=biblatex-sp-unified,
-                citestyle=sp-authoryear-comp,
+                style=unified,
                 maxcitenames=3,
                 maxbibnames=99]{biblatex}
 

@@ -1,0 +1,727 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={biblatex-unified},
+  pdfauthor={Kai von Fintel (fintel@mit.edu)},
+  colorlinks=true,
+  linkcolor=Maroon,
+  filecolor=Maroon,
+  citecolor=Blue,
+  urlcolor=Blue,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{255,255,255}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{\textbf{\colorbox[rgb]{0.97,0.90,0.90}{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.79,0.38,0.79}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.39,0.29,0.61}{\textbf{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.57,0.30,0.62}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.54,0.53,0.53}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.00,0.58,1.00}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.67,0.33,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.38,0.47,0.50}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{\underline{#1}}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.58,1.00}{\textbf{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.39,0.29,0.61}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{1.00,0.33,0.00}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.69,0.50,0.00}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.12,0.11,0.11}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.43,0.16}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.00,0.43,0.16}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{\colorbox[rgb]{0.88,0.91,0.97}{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.24,0.68,0.91}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{1.00,0.33,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.34,0.68}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.75,0.01,0.01}{#1}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+\title{biblatex-unified}
+\author{Kai von Fintel (fintel@mit.edu)}
+\date{2020-06-15}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction-and-usage}{%
+\section{Introduction and Usage}\label{introduction-and-usage}}
+
+\texttt{biblatex-unified} is an opinionated biblatex implementation of
+the \href{http://celxj.org/downloads/UnifiedStyleSheet.pdf}{Unified
+Stylesheet for Linguistics Journal}. The stylesheet was developed by
+\href{http://celxj.org/}{CELxJ, the Committee of Editors of Linguistics
+Journals}. There is a standard BibTeX implementation, called
+\href{http://celxj.org/downloads/unified.bst}{\texttt{unified.bst}},
+which was developed by Bridget Samuels, based on work done for the
+house-style of the journal \href{http://semprag.org}{\emph{Semantics and
+Pragmatics}} (\emph{S\&P}). This current project is a ground-up
+re-implementation in modern biblatex. It has been used by \emph{S\&P} in
+production for several years.
+
+Please
+\href{https://github.com/semprag/biblatex-sp-unified/issues/new}{file an
+issue at github} to let us know of any problems you encounter and any
+recommendations for improvement.
+
+\hypertarget{sources}{%
+\subsection{Sources}\label{sources}}
+
+The \texttt{biblatex-unified} style consists of two files:
+
+\begin{itemize}
+\tightlist
+\item
+  \href{unified.bbx}{\VERB|\NormalTok{unified.bbx}|} -- for formatting
+  the bibliography.
+\item
+  \href{unified.cbx}{\VERB|\NormalTok{unified.cbx}|} -- for formatting
+  in-text citations in the style of \emph{S\&P}.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Since the Unified Stylesheet does not give any guidelines for
+    in-text citations, this file is optional and users can choose other
+    citation styles, such as the \texttt{authoryear-comp} citation style
+    that comes with biblatex.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{requirements-and-backward-compatibility}{%
+\subsection{Requirements and backward
+compatibility}\label{requirements-and-backward-compatibility}}
+
+Compiling LaTeX documents with this style depends on a fairly recent TeX
+installation that includes biblatex 2.0+. It is tested only with the
+\texttt{biber} backend. TexLive 2019 or later would be ideal.
+
+\hypertarget{installation}{%
+\subsection{Installation}\label{installation}}
+
+Manual installation involves putting the two files \texttt{unified.bbx}
+and \texttt{unified.cbx} somewhere where your TeX system can find them.
+This could be local in the same directory as your tex source file, or in
+your \texttt{TEXMF} ``home'' directory, or in the system \texttt{TEXMF}
+directories.
+
+\hypertarget{configuring-your-.tex-document-to-use-the-style}{%
+\subsection{\texorpdfstring{Configuring your \texttt{.tex} document to
+use the
+style}{Configuring your .tex document to use the style}}\label{configuring-your-.tex-document-to-use-the-style}}
+
+To use the style in conjunction with \emph{S\&P}'s
+\href{https://raw.githubusercontent.com/semprag/tex/master/sp.cls}{\VERB|\NormalTok{sp.cls}|},
+simply add the \texttt{biblatex} class option when importing
+\VERB|\NormalTok{sp.cls}|:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \BuiltInTok{\textbackslash{}documentclass}\NormalTok{[biblatex]\{}\ExtensionTok{sp}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+If you are not using the \emph{S\&P} document class, you can still use
+this style by adding the following to your preamble (after
+\VERB|\BuiltInTok{\textbackslash{}documentclass}\NormalTok{\{}\ExtensionTok{...}\NormalTok{\}}|
+but before
+\VERB|\KeywordTok{\textbackslash{}begin}\NormalTok{\{}\ExtensionTok{document}\NormalTok{\}}|):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+    \BuiltInTok{\textbackslash{}usepackage}\NormalTok{[backend=biber,}
+\NormalTok{                style=unified,}
+\NormalTok{                maxcitenames=3,}
+\NormalTok{                maxbibnames=99]\{}\ExtensionTok{biblatex}\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+If you were previously using \VERB|\NormalTok{natbib}|, remove
+\VERB|\BuiltInTok{\textbackslash{}usepackage}\NormalTok{\{}\ExtensionTok{natbib}\NormalTok{\}}|
+and any accompanying
+\VERB|\BuiltInTok{\textbackslash{}bibliographystyle}\NormalTok{\{}\ExtensionTok{...}\NormalTok{\}}|
+and \VERB|\FunctionTok{\textbackslash{}bibpunct}\NormalTok{\{...\}}|
+settings. You might also find it helpful to add
+\VERB|\NormalTok{natbib}| to the list of options
+(\VERB|\BuiltInTok{\textbackslash{}usepackage}\NormalTok{[..., natbib]\{}\ExtensionTok{biblatex}\NormalTok{\}}|),
+to load biblatex's \VERB|\NormalTok{natbib}| compatibility module, which
+implements common \VERB|\NormalTok{natbib}| commands like
+\VERB|\KeywordTok{\textbackslash{}citet}|,
+\VERB|\KeywordTok{\textbackslash{}citep}|,
+\VERB|\FunctionTok{\textbackslash{}citealt}|,
+\VERB|\FunctionTok{\textbackslash{}citealp}|, etc.
+
+Whether you're using \texttt{sp.cls} or a different document class,
+you'll need to change the usual BibTeX commands to biblatex, in two
+places:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Replace the
+  \VERB|\BuiltInTok{\textbackslash{}bibliography}\NormalTok{\{}\ExtensionTok{your{-}bibfile}\NormalTok{\}}|
+  line in the backmatter with
+  \VERB|\FunctionTok{\textbackslash{}printbibliography}|.
+\item
+  Add the following command to your preamble:\\
+  \VERB|\FunctionTok{\textbackslash{}addbibresource}\NormalTok{\{your{-}bibfile.bib\}}|
+
+  \begin{itemize}
+  \tightlist
+  \item
+    NB: the \VERB|\NormalTok{.bib}| extension must be included (unlike
+    BibTeX)
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{testing}{%
+\subsection{Testing}\label{testing}}
+
+Testing consists of rendering \VERB|\NormalTok{unified{-}test.tex}| (and
+\VERB|\NormalTok{unified{-}test.bib}|) into a PDF, comparing the result
+to the sample bibliography in the Unified Stylesheet guidelines.
+
+\hypertarget{producing-the-documentation}{%
+\subsection{Producing the
+documentation}\label{producing-the-documentation}}
+
+The documentation consists of the \VERB|\NormalTok{README.md}| file and
+this PDF. The PDF can be regenerated by typesetting the
+\VERB|\NormalTok{tex}| source file with \VERB|\NormalTok{xelatex}|. The
+\VERB|\NormalTok{tex}| is actually itself generated from the underlying
+\VERB|\NormalTok{md}| markdown file via \VERB|\NormalTok{pandoc}| with
+the following incantation:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pandoc {-}f markdown {-}t latex biblatex{-}unified.md {-}s}\DataTypeTok{\textbackslash{} }
+\NormalTok{{-}o biblatex{-}unified.tex {-}{-}highlight{-}style=kate}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{implementation-notes}{%
+\section{Implementation notes}\label{implementation-notes}}
+
+\texttt{biblatex-unified} is meant to implement as fully as possible the
+\href{http://celxj.org/downloads/UnifiedStyleSheet.pdf}{Unified Style
+Sheet for Linguistics Journals}, which consists of a number of
+guidelines and thoughts on the formatting of bibliographies, a sample
+bibliography and some comments on that sample.
+
+The \texttt{biblatex-unified} distribution includes a copy of the
+Unified Style Sheet and a bib-file that corresponds to the references
+typeset in the Style Sheet specifications. So, this bib-file can be used
+to test the implementation of the Style Sheet. We include the source
+code of the test LaTeX file and the resulting pdf to demonstrate that we
+have faithfully implemented the Style Sheet, with some minor
+differences.
+
+When it comes to implementing the guidelines in a LaTeX typesetting
+environment, most of the guidelines can be implemented in the
+bibliography style (a bst file for BibTex or a bbx file for biblatex),
+but there are some points that need to be taken into account earlier in
+the preparation of the bib file containing the bibliographic details for
+the references to be listed.
+
+Here is a point by point copy of the Unified Style Sheet guidelines,
+followed by commentary on our implementation.
+
+\begin{quote}
+1. \textbf{Superfluous font-styles should be omitted.} Do not use small
+caps for author/editor names, since they do not help to distinguish
+these from any other bits of information in the citation. In contrast,
+italics are worthwhile for distinguishing volume (book, journal,
+dissertation) titles {[}+ital{]} from article and chapter titles
+{[}-ital{]}.
+\end{quote}
+
+\begin{quote}
+2. \textbf{Superfluous punctuation should be left out.} Once italic is
+adopted to distinguish volumes from articles/chapters (as above), then
+single or double quotations around article titles are superfluous and
+only add visual clutter.
+\end{quote}
+
+\texttt{biblatex-unified}: Article and chapter titles are set in roman
+font, while titles of books, dissertations, and journals are set in
+italics. There are no quotation marks around titles.
+
+\begin{quote}
+3. \textbf{Differing capitalization styles should be used to make
+category distinctions.} Use capitalization of all lexical words for
+journal titles and capitalize only the first word (plus proper names and
+the first word after a colon) for book/dissertation titles and
+article/chapter titles. This is a useful diagnostic for discriminating
+between titles that are recurring and those that are not. The journal
+style for capitalization should also be applied to the title of book
+series. Thus, the citation of a SNLLT volume would be punctuated:
+\emph{Objects and other subjects: Grammatical functions, functional
+categories, and configurationality} (Studies in Natural Language and
+Linguistic Theory 52).
+\end{quote}
+
+\texttt{biblatex-unified}: Recurring titles (i.e.~titles of journals and
+book series) are set in title case (capitalization of all lexical
+words), while non-recurring titles (articles, chapters, books,
+dissertations) are set in sentence case (capitalize only the first word,
+plus proper names and the first word after a colon).
+
+NB: It is fairly easy to convert a title given in title case into
+sentence case. But the other way round is quite difficult.
+\texttt{biblatex-unified.bbx} depends on the bib file containing title
+case for those elements that should be set in title case. For those
+elements that will be set in sentence case, the bbx file will do the
+conversion to sentence case. Proper names (and the first word after a
+colon) need to be protected against that lower casing, so the bib-file
+should have \texttt{\{...\}} braces around those words. Please note that
+just putting \texttt{\{\}} around the first letter in words that should
+be capitalized is bad practice since it prevents proper kerning of the
+space between the first and second letter. Even worse practice is to
+``double wrap'' a whole title in braces, which prevents any style file
+from setting the title in the style specified by its formatting
+philosophy.
+
+NB: It is to be encouraged that titles and subtitles be entered into
+separate fields in the bib entry. In that case, the bbx file will
+properly capitalize the first letter of the subtitle. So, the first of
+the following formats is preferred for use with the unified bbx style
+(but it has the disadvantage of not necessarily being compatible with
+other bibliography styles):
+
+Option 1
+
+\begin{verbatim}
+title = {Government and Binding Theory and the Minimalist Program},
+subtitle = {Principles and Parameters in Syntactic Theory},
+\end{verbatim}
+
+Option 2
+
+\begin{verbatim}
+title = {Government and Binding Theory and the Minimalist Program:  
+        {Principles} and Parameters in Syntactic Theory},
+\end{verbatim}
+
+\begin{quote}
+4. \textbf{All author/editor first names should be spelled out.} Not
+doing so only serves to make the citation less informative. Without full
+first names, the 20th century index for Language alone would conflate
+five different people as `J. Smith', four as `J. Harris', three each
+under `A. Cohen' and `P. Lee', two each under `R. Kent', `J. Anderson',
+`H. Klein' and `J. Klein'.
+\end{quote}
+
+\texttt{biblatex-unified}: The style does not abbreviate first names.
+Compliance with the Unified Style depends on the bib-file containing
+full names for everyone.
+
+\begin{quote}
+5. \textbf{The ampersand is useful.} Use ampersand to distinguish higher
+and lower order conjuncts, i.e.~{[}W \& X{]} and {[}Y \& Z{]}, as in
+Culicover \& Wilkins and Koster \& May. It is relatively easy to see
+that reference is made here to two pairs of authors here (cf.~Culicover
+and Wilkins and Koster and May).
+\end{quote}
+
+\texttt{biblatex-unified}: The style uses the ampersand rather than a
+final ``and'' in author and editor lists. This is taken care of by
+\texttt{biblatex-unified}.
+
+\begin{quote}
+6. \textbf{Name repetitions are good.} While using a line \_\_\_\_ may
+save a little space, or a few characters, it also makes each such
+citation referentially dependent on an antecedent, and the effort of
+calculating such antecedents is more than what it saved typographically.
+Each citation should be internally complete.
+\end{quote}
+
+\texttt{biblatex-unified}: The style does not use a dashed line for
+repeated authors in the reference list.
+
+\begin{quote}
+7. \textbf{Four digit year plus period only.} Extra parentheses are
+visual clutter and superfluous.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+8. \textbf{Commas and periods and other punctuation.} Separate citation
+components with periods (e.g., Author. Year. Title.) and subcomponents
+with commas (e.g., Author1, Author2 \& Author3). Please note the
+ampersand (\&), rather than the word ``and'' before the name of the last
+author, and no comma before the ``\&''. The use of the colon between
+title and subtitle and between place and publisher is traditional, but
+we do not use it between journal volumenumber and pagenumbers.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+9. \textbf{Parentheses around ed.~makes sense.} Commas and periods
+should be used exclusively to separate citation components (e.g.,
+``Author. Year.''), or subcomponents (e.g.~``author1, author2 \&
+author3). Since''ed." is neither a component nor a subcomponent, but a
+modifier of a component, it should not be separated from the name by a
+comma:
+\end{quote}
+
+\begin{quote}
+surname, firstname = author surname, firstname (ed.). = editor (NOT
+surname, firstname, ed.) surname, firstname \& firstname surname (eds.)
+= editors
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+10. \textbf{For conference proceedings, working papers, etc.} For
+conference proceedings published with an ISSN, treat the proceedings as
+a journal: Include both the full conference name and any commonly used
+acronym for the conference (BLS, WCCFL, etc.) in the journal title
+position. For proceedings not published with an ISSN, treat the
+proceedings as any other book, using the full title as listed on the
+front cover or title page. If the title (and subtitle if there is one)
+only includes an acronym for the conference name, expand the acronym in
+square brackets or parentheses following the acronym. If the title does
+not include an acronym which is commonly used for the conference name,
+include the acronym in square brackets or parentheses following the
+conference name. The advantage of including the acronym after the
+society title is that it makes the entry much more identifiable in a
+list of references.
+\end{quote}
+
+{[}From the comments by Joseph Salmons:{]}
+
+\begin{quote}
+Do not include ``proceedings of the'' or ``papers from the''.
+\end{quote}
+
+NB: The examples included with the Unified Style Sheet do not include
+the editors of the CLS proceedings volume. We agree with this practice,
+since the names of editors of such proceedings are often hard to get
+hold of.
+
+\texttt{biblatex-unified}: These guidelines need to be satisfied in the
+construction of the bib-file. There are two approaches, one more of a
+hack than the other:
+
+\emph{Option 1}: Use the \texttt{@inproceedings} entry type and include
+the ISSN of the proceedings when available. Example:
+
+\begin{verbatim}
+@inproceedings{casali:1998a,
+    Author = {Casali, Roderic F.},
+    Booktitle = {Chicago Linguistic Society (CLS)},
+    ISSN = {0577-7240},
+    Number = {1},
+    Pages = {55-68},
+    Title = {Predicting {ATR} Activity},
+    Volume = {34},
+    Year = {1998}}
+\end{verbatim}
+
+Comment: Following the Unified Style Sheet, we can let the presence of
+an ISSN control whether an article in conference proceedings is set like
+a journal article or like a book chapter. To do this, the bib-file needs
+to contain the ISSN of proceedings where possible. When the ISSN is in
+the bib-file, \texttt{biblatex-unified} will not print it with the entry
+but it will trigger setting as an article. If there's no ISSN in the
+entry, \texttt{biblatex-unified} will set it as a book chapter. The ISSN
+can be found through \href{http://www.worldcat.org}{WorldCat} fairly
+easily. Here's a list of common conference proceedings with their ISSN:
+
+\begin{itemize}
+\tightlist
+\item
+  BLS: 0363-2946
+\item
+  CLS: 0577-7240
+\item
+  NELS: 0883-5500
+\item
+  SALT: 2163-5951
+\item
+  WCCFL: 1042-1068
+\end{itemize}
+
+\emph{Option 2}: Another option, less portable and definitely a hack, is
+to use the \texttt{@article} entry type, putting the conference name
+(and the acronym in parentheses; no need to case protect the acronym,
+since journal titles are set as is) in the \texttt{journal} field, and
+do not list the editors. Example:
+
+\begin{verbatim}
+@article{casali:1998b,
+    Author = {Casali, Roderic F.},
+    Journal = {Chicago Linguistic Society (CLS)},
+    Number = {1},
+    Pages = {55-68},
+    Title = {Predicting {ATR} Activity},
+    Volume = {34},
+    Year = {1998}}
+\end{verbatim}
+
+\begin{quote}
+11. \textbf{Use ``edn.'' as an abbreviation for ``edition'', thus ``2nd
+edn.''.} This avoids ambiguity and confusion with ``ed.'' (editor).
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+12. \textbf{Names with ``von'', ``van'', ``de'', etc.} If the ``van''
+(or the ``de'' or other patronymic) is lower case and separated from the
+rest by a space (e.g.~Elly van Gelderen), then alphabetize by the first
+upper-case element:
+\end{quote}
+
+\begin{quote}
+\texttt{Gelderen,\ Elly\ van}
+\end{quote}
+
+\begin{quote}
+The addition of ``see \ldots{}'' in comprehensive indices and lists
+might be helpful for clarification:
+\end{quote}
+
+\begin{quote}
+\texttt{van\ Gelderen,\ Elly\ (see\ Gelderen)}
+\end{quote}
+
+\texttt{biblatex-unified}: This is a point where we depart from the
+Unified Style Sheet. If the ``van'' (or the ``de'' or other patronymic)
+is lower case and separated from the rest by a space (e.g.~Elly van
+Gelderen), then alphabetize by the first upper-case element \textbf{but
+display the particle as part of the last name in its usual position}:
+
+\begin{verbatim}
+`van Gelderen, Elly [alphabetized under "G"]`
+\end{verbatim}
+
+NB: biblatex-unified is the only biblatex style that we know of that
+implements this practice (it took some hacking to make this possible).
+There is no need to do anything in the bib-file to ensure proper
+treatment of ``von'' etc.
+
+\begin{quote}
+13. \textbf{Names with ``Jr.'', ``IV.'', etc.} Following library
+practice, list elements such as ``Jr.'' as a subelement after names,
+separated by a comma.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+14. \textbf{Use ``In'' to designate chapters in collections.} This makes
+the book's format maximally similar to the standard citation format.
+This, in turn, would be time-saving when the author or the editor notice
+that more than one article is cited from a given collection and hence
+that that book's details should be set out as a separate entry in the
+references (and the full details deleted from the articles' entries).
+author. year. chaptertitle. In editorname (ed.), collectiontitle,
+pagenumbers. publisher.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet.
+
+\begin{quote}
+15. \textbf{Journal volume numbers.} We favor:
+volumenumber(volumeissue). startingpage--endingpage. Thus: 22(1).
+135-169. Note the space between volume number/issue and page numbers.
+Special formatting (e.g., bold for volume number) is superfluous. Issue
+numbers are a parenthetical modifier (cf.~``ed.'' above) of the volume
+number. While it is not NECESSARY information for identifying the
+article, it is extremely USEFUL information.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet. Providing issue numbers is a guideline for the preparation of the
+bib-file.
+
+\begin{quote}
+16. \textbf{Dissertations/theses.} These conform to the
+already-widespread Place: Publisher format and fit readily into the rest
+of the standard: Cambridge, MA: MIT dissertation. Instead of archaic
+state abbreviations, use the official two-letter postal abbreviations.
+Note that national and other traditions vary in exactly what is labeled
+`thesis' versus `dissertation' and in distinguishing `PhD' from
+`doctoral' dissertations. Cambridge, MA: MIT dissertation. Chapel Hill:
+UNC MA thesis.
+\end{quote}
+
+\texttt{biblatex-unified}: The style complies with the Unified Style
+Sheet. Using the two-letter postal abbreviations is something that needs
+to be taken care of during the preparation of the bib-file.
+
+\begin{quote}
+17. \textbf{On-line materials.} The basic information here -- author,
+date, title -- remains the same, and the URL where the resource was
+found takes the place of publisher or journal. We urge authors to
+include the date the material was accessed, in parentheses after the
+URL, since new versions often replace old ones. For a .pdf file, this
+would be the date of downloading, but for a resource like an on-line
+dictionary consulted repeatedly, a range of dates may be needed. For
+additional discussion of handling online citations, authors may want to
+consult this guide:
+\end{quote}
+
+\begin{quote}
+Walker, Janice R. \& Todd Taylor. 1998. The Columbia Guide to Online
+Style. New York: Columbia University Press.
+\end{quote}
+
+\texttt{biblatex-unified}: We take it that this does not refer to
+material that has officially been published online, in which case
+permanent document identifiers such as DOIs and the like will take care
+of the linking requirements. Rather, we are assuming this refers to
+``unpublished'' material available online (on author's homepages or
+repositories such as the Semantics Archive or LingBuzz). In this case,
+just use the \texttt{@unpublished} entry-type, give the URL in the
+\texttt{url\ =\ \{\}} field, and if deemed necessary include the date
+the material was accessed by adding an \texttt{urldate\ =\ \{\}} field.
+The date should be given in YYYY-MM-DD format,
+e.g.~\texttt{urldate\ =\ \{2013-08-11\}}. The style will then add the
+date in parentheses, formatted to the style sheet's rather odd format.
+
+\hypertarget{departures-from-the-unified-style-sheet}{%
+\section{Departures from the Unified Style
+Sheet}\label{departures-from-the-unified-style-sheet}}
+
+We already mentioned our one major disagreement with the Unified Style
+Sheet: the incorrect treatment of the ``von'' part of names.
+
+We depart from the style sheet only in a few other places. These are
+actually only departures from the example formatting given and do not
+pertain to any explicit guidelines.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  The acronym ``CLS'' given in parentheses after ``Chicago Linguistic
+  Society'' in the Casali 1986 entry is not given in italics in the
+  example. Since it is part of the ``journal title'' field,
+  \texttt{biblatex-unified} will typeset it in italics.
+\item
+  The example URLs have a period inside the parentheses around the URL
+  access date. We have relocated this period to outside the parentheses.
+\item
+  In the one case of an online journal article, the Pedersen 2005 entry,
+  the example has a comma between the journal + volume and the URL. We
+  think that this is analogous to the break between journal +
+  volume(issue) and page numbers, and so it should be a period instead
+  of a comma. That is what \texttt{biblatex-unified} does.
+\item
+  There is a period between the URL and the URL access date (which is in
+  parentheses). We do not think that this period should be there.
+  \texttt{biblatex-unified} has a space.
+\end{enumerate}
+
+\hypertarget{guidelines-for-the-preparation-of-bib-files}{%
+\section{Guidelines for the preparation of bib
+files}\label{guidelines-for-the-preparation-of-bib-files}}
+
+For convenience, we repeat the best practices for preparing your bib
+file for use with \texttt{biblatex-unified}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Any words in the titles of articles, books, dissertations that should
+  not be lowercased (other than the first word) have to be protected by
+  \{\} brackets around that word (not just around the first letter of
+  the word and never double wrap the entire title!). This includes the
+  first word after a subtitle colon (unless the subtitle field is used
+  instead).
+\item
+  Give full first names for all authors and editors (all persons listed
+  in the bib file).
+\item
+  For conference proceedings, working papers, etc. For conference
+  proceedings published with an ISSN, treat the proceedings as a
+  journal: Include both the full conference name and any commonly used
+  acronym for the conference (BLS, WCCFL, etc.) in the journal title
+  position. Do not include the editors in the bib-file. For proceedings
+  not published with an ISSN, treat the proceedings as any other book,
+  using the full title as listed on the front cover or title page. If
+  the title (and subtitle if there is one) only includes an acronym for
+  the conference name, expand the acronym in square brackets or
+  parentheses following the acronym. If the title does not include an
+  acronym which is commonly used for the conference name, include the
+  acronym in square brackets or parentheses following the conference
+  name. The advantage of including the acronym after the society title
+  is that it makes the entry much more identifiable in a list of
+  references. Do not include ``proceedings of the'' or ``papers from
+  the''.
+\item
+  For on-line materials, you can give the date the resource was
+  accessed. Use the \texttt{urldate} field for this purpose and give the
+  date in the YYYY-MM-DD format, e.g.~\texttt{2013-08-11}.
+\item
+  Use two-letter postal abbreviations for all US cities.
+\end{enumerate}
+
+\end{document}
