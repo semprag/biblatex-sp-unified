@@ -1,7 +1,7 @@
 biblatex-unified
 ================
 
-`biblatex-unified` is an opinionated biblatex implementation of the [Unified Stylesheet for Linguistics Journal](https://www.linguisticsociety.org/resource/unified-style-sheet). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](https://www.linguisticsociety.org/about/who-we-are/committees/editors-linguistics-journals-celxj). 
+`biblatex-unified` is an opinionated biblatex implementation of the [Unified Stylesheet for Linguistics Journals](https://www.linguisticsociety.org/resource/unified-style-sheet). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](https://www.linguisticsociety.org/about/who-we-are/committees/editors-linguistics-journals-celxj). 
 
 The first implementation of the stylesheet for LaTeX was [`sp.bst`](https://raw.githubusercontent.com/semprag/tex/master/sp.cls), developed for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*). Bridget Samuels produced a revised version `unified.bst`, which has largely disappeared from the internet.
 
