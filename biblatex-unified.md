@@ -1,14 +1,18 @@
 ---
 title: biblatex-unified
 author: Kai von Fintel (fintel@mit.edu)
-date: 2020-06-15
+date: 2020-05-25
 colorlinks: true
 numbersections: true
 ...
 
 # Introduction and Usage
 
-`biblatex-unified` is an opinionated biblatex implementation of the [Unified Stylesheet for Linguistics Journal](http://celxj.org/downloads/UnifiedStyleSheet.pdf). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](http://celxj.org/). There is a standard BibTeX implementation, called [`unified.bst`](http://celxj.org/downloads/unified.bst), which was developed by Bridget Samuels, based on work done for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*). This current project is a ground-up re-implementation in modern biblatex. It has been used by *S&P* in production for several years.
+`biblatex-unified` is an opinionated biblatex implementation of the [Unified Stylesheet for Linguistics Journal](https://www.linguisticsociety.org/resource/unified-style-sheet). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](https://www.linguisticsociety.org/about/who-we-are/committees/editors-linguistics-journals-celxj). 
+
+The first implementation of the stylesheet for LaTeX was [`sp.bst`](https://raw.githubusercontent.com/semprag/tex/master/sp.cls), developed for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*). Bridget Samuels produced a revised version `unified.bst`, which has largely disappeared from the internet.
+
+The current project is a ground-up re-implementation of the unified stylesheet in modern biblatex. It has been used by *S&P* in production for several years.
 
 Please [file an issue at github](https://github.com/semprag/biblatex-sp-unified/issues/new) to let us know of any problems you encounter and any recommendations for improvement.
 
@@ -245,3 +249,18 @@ For convenience, we repeat the best practices for preparing your bib file for us
 5. Use two-letter postal abbreviations for all US cities.
 
 
+# License and copyright
+
+Copyright ©2020 Kai von Fintel. 
+
+This package is author-maintained. Permission is granted to copy, distribute
+and/or modify this software under the terms of the LaTeX Project Public License,
+version 1.3c. 
+
+This software is provided “as is,” without warranty of any kind, either
+expressed or implied, including, but not limited to, the implied warranties of
+merchantability and fitness for a particular purpose.
+
+# Changelog and release notes
+
+**v1.00 (2020-05-25)** Initial CTAN release.

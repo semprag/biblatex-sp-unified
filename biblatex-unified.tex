@@ -93,7 +93,7 @@
 
 \title{biblatex-unified}
 \author{Kai von Fintel (fintel@mit.edu)}
-\date{2020-06-15}
+\date{2020-05-25}
 
 \begin{document}
 \maketitle
@@ -102,15 +102,21 @@
 \section{Introduction and Usage}\label{introduction-and-usage}}
 
 \texttt{biblatex-unified} is an opinionated biblatex implementation of
-the \href{http://celxj.org/downloads/UnifiedStyleSheet.pdf}{Unified
+the
+\href{https://www.linguisticsociety.org/resource/unified-style-sheet}{Unified
 Stylesheet for Linguistics Journal}. The stylesheet was developed by
-\href{http://celxj.org/}{CELxJ, the Committee of Editors of Linguistics
-Journals}. There is a standard BibTeX implementation, called
-\href{http://celxj.org/downloads/unified.bst}{\texttt{unified.bst}},
-which was developed by Bridget Samuels, based on work done for the
-house-style of the journal \href{http://semprag.org}{\emph{Semantics and
-Pragmatics}} (\emph{S\&P}). This current project is a ground-up
-re-implementation in modern biblatex. It has been used by \emph{S\&P} in
+\href{https://www.linguisticsociety.org/about/who-we-are/committees/editors-linguistics-journals-celxj}{CELxJ,
+the Committee of Editors of Linguistics Journals}.
+
+The first implementation of the stylesheet for LaTeX was
+\href{https://raw.githubusercontent.com/semprag/tex/master/sp.cls}{\texttt{sp.bst}},
+developed for the house-style of the journal
+\href{http://semprag.org}{\emph{Semantics and Pragmatics}}
+(\emph{S\&P}). Bridget Samuels produced a revised version
+\texttt{unified.bst}, which has largely disappeared from the internet.
+
+The current project is a ground-up re-implementation of the unified
+stylesheet in modern biblatex. It has been used by \emph{S\&P} in
 production for several years.
 
 Please
@@ -723,5 +729,24 @@ file for use with \texttt{biblatex-unified}.
 \item
   Use two-letter postal abbreviations for all US cities.
 \end{enumerate}
+
+\hypertarget{license-and-copyright}{%
+\section{License and copyright}\label{license-and-copyright}}
+
+Copyright ©2020 Kai von Fintel.
+
+This package is author-maintained. Permission is granted to copy,
+distribute and/or modify this software under the terms of the LaTeX
+Project Public License, version 1.3c.
+
+This software is provided ``as is,'' without warranty of any kind,
+either expressed or implied, including, but not limited to, the implied
+warranties of merchantability and fitness for a particular purpose.
+
+\hypertarget{changelog-and-release-notes}{%
+\section{Changelog and release
+notes}\label{changelog-and-release-notes}}
+
+\textbf{v1.00 (2020-05-25)} Initial CTAN release.
 
 \end{document}
