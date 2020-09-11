@@ -90,6 +90,9 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{5}
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 
 \title{biblatex-unified}
 \author{Kai von Fintel (fintel@mit.edu)}
@@ -195,6 +198,13 @@ but before
 \NormalTok{                maxbibnames=99]\{}\ExtensionTok{biblatex}\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
+
+The unified citation style relies on hyperlinking between in-text
+citations and the bibliography. So, the \texttt{hyperref} package is
+required. It is automatically loaded by \texttt{sp.cls} but if you use a
+different document class and \texttt{hyperref} is not loaded by that
+class, you need to add \texttt{\textbackslash{}usepackage\{hyperref\}}
+to your preamble as well.
 
 If you were previously using \VERB|\NormalTok{natbib}|, remove
 \VERB|\BuiltInTok{\textbackslash{}usepackage}\NormalTok{\{}\ExtensionTok{natbib}\NormalTok{\}}|
@@ -747,6 +757,8 @@ warranties of merchantability and fitness for a particular purpose.
 \section{Changelog and release
 notes}\label{changelog-and-release-notes}}
 
-\textbf{v1.00 (2020-05-25)} Initial CTAN release.
+\textbf{v1.00 (2020-05-25)} Initial CTAN release.\\
+\textbf{v1.01 (2020-09-11)} Added note that \texttt{hyperref} is
+required.
 
 \end{document}

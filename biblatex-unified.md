@@ -265,4 +265,5 @@ merchantability and fitness for a particular purpose.
 
 # Changelog and release notes
 
-**v1.00 (2020-05-25)** Initial CTAN release.
+**v1.00 (2020-05-25)** Initial CTAN release.  
+**v1.01 (2020-09-11)** Added note that `hyperref` is required.
