@@ -54,6 +54,8 @@ If you are not using the *S&P* document class, you can still use this style by a
                 maxbibnames=99]{biblatex}
 ```
 
+The unified citation style relies on hyperlinking between in-text citations and the bibliography. So, the `hyperref` package is required. It is automatically loaded by `sp.cls` but if you use a different document class and `hyperref` is not loaded by that class, you need to add `\usepackage{hyperref}` to your preamble as well.
+
 If you were previously using `natbib`{.latex}, remove `\usepackage{natbib}`{.latex} and any accompanying `\bibliographystyle{...}`{.latex} and `\bibpunct{...}`{.latex} settings.
 You might also find it helpful to add `natbib`{.latex} to the list of options (`\usepackage[..., natbib]{biblatex}`{.latex}), to load biblatex's `natbib`{.latex} compatibility module, which implements common `natbib`{.latex} commands like `\citet`{.latex}, `\citep`{.latex}, `\citealt`{.latex}, `\citealp`{.latex}, etc.
 
