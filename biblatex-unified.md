@@ -1,7 +1,7 @@
 ---
 title: biblatex-unified
 author: Kai von Fintel (fintel@mit.edu)
-date: 2020-05-25
+date: 2022-02-05
 colorlinks: true
 numbersections: true
 ...
@@ -227,7 +227,6 @@ NB: biblatex-unified is the only biblatex style that we know of that implements 
 
 `biblatex-unified`: We take it that this does not refer to material that has officially been published online, in which case permanent document identifiers such as DOIs and the like will take care of the linking requirements. Rather, we are assuming this refers to "unpublished" material available online (on author's homepages or repositories such as the Semantics Archive or LingBuzz). In this case, just use the `@unpublished` entry-type, give the URL in the `url = {}` field, and if deemed necessary include the date the material was accessed by adding an `urldate = {}` field. The date should be given in YYYY-MM-DD format, e.g. `urldate = {2013-08-11}`. The style will then add the date in parentheses, formatted to the style sheet's rather odd format.
 
-
 # Departures from the Unified Style Sheet
 
 We already mentioned our one major disagreement with the Unified Style Sheet: the incorrect treatment of the "von" part of names.
@@ -239,6 +238,29 @@ We depart from the style sheet only in a few other places. These are actually on
 3. In the one case of an online journal article, the Pedersen 2005 entry, the example has a comma between the journal + volume and the URL. We think that this is analogous to the break between journal + volume(issue) and page numbers, and so it should be a period instead of a comma. That is what `biblatex-unified` does.
 4. There is a period between the URL and the URL access date (which is in parentheses). We do not think that this period should be there. `biblatex-unified` has a space.
 
+# Additional remarks on DOIs and other links
+
+The Unified Style Sheet was devised before the widespread use of DOIs to identify the source of materials that are available electronically. It is good practice for authors to include DOIs in their bib-file for anything that has a DOI. Most modern publications prominently display the DOI on the first page of the work and/or in the metadata. Sometimes a DOI is harder to find, but [Google Scholar](http://scholar.google.com/) and [crossref.org/SimpleTextQuery](http://crossref.org/SimpleTextQuery/) can help. `biblatex-unified` displays DOIs as a full link (such as `https://doi.org/10.3765/sp.10.1`) in accordance with [the guidelines imposed by Crossref](https://www.crossref.org/display-guidelines/). If you would like a more compact display (`DOI:10.3765/sp.10.1`), you can achieve this by adding the `compactdois` package option to the `\usepackage`{.latex} command: 
+
+```latex
+    \usepackage[backend=biber,
+                style=unified,
+                maxcitenames=3,
+                maxbibnames=99,
+                compactdois]{biblatex}
+```
+
+If you're using the `sp.cls` document class with the `biblatex` option, you should instead add this to the preamble: `\ExecuteBibliographyOptions{compactdois}`{.latex}, if you want compact DOIs
+
+When `biblatex-unified` is used with the up-todate version of the `sp.cls` documentclass, once a bibentry has a DOI, a link in the `url` field will not also be displayed. If you want to achieve this effect with other document classes, you can add the following to your preamble after loading `biblatex-unified`:
+
+```latex
+\DeclareSourcemap{
+        \maps[datatype=bibtex]{
+        \map{\step[fieldsource=doi,final]
+             \step[fieldset=url,null]
+             \step[fieldset=urldate,null]}}}
+```
 
 # Guidelines for the preparation of bib files
 
@@ -253,17 +275,25 @@ For convenience, we repeat the best practices for preparing your bib file for us
 
 # License and copyright
 
-Copyright ©2020 Kai von Fintel. 
+Copyright ©2022 Kai von Fintel. 
 
-This package is author-maintained. Permission is granted to copy, distribute
-and/or modify this software under the terms of the LaTeX Project Public License,
-version 1.3c. 
+This package is author-maintained. Permission is granted to copy, distribute and/or modify this software under the terms of the LaTeX Project Public License, version 1.3c.
 
-This software is provided “as is,” without warranty of any kind, either
-expressed or implied, including, but not limited to, the implied warranties of
-merchantability and fitness for a particular purpose.
+This software is provided “as is,” without warranty of any kind, either expressed or implied, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose.
 
 # Changelog and release notes
 
-**v1.00 (2020-05-25)** Initial CTAN release.  
-**v1.01 (2020-09-11)** Added note that `hyperref` is required.
+## v1.00 (2020-05-25) {-}
+
+- Initial CTAN release.
+
+## v1.01 (2020-09-11) {-}
+
+- Added note that `hyperref` is required.  
+
+## v1.1 (2022-02-05) {-}
+
+- Internal refactoring of handling of "von"-names
+- Changed `&` to be glued to previous author
+- Added `compactdois` option
+- Added documentation on DOIs
