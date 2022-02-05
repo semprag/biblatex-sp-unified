@@ -291,7 +291,7 @@ This software is provided “as is,” without warranty of any kind, either expr
 
 - Added note that `hyperref` is required.  
 
-## v1.1 (2022-02-05) {-}
+## v1.10 (2022-02-05) {-}
 
 - Internal refactoring of handling of "von"-names
 - Changed `&` to be glued to previous author
