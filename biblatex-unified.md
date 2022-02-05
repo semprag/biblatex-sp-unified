@@ -283,6 +283,17 @@ This software is provided “as is,” without warranty of any kind, either expr
 
 # Changelog and release notes
 
-**v1.00 (2020-05-25)** Initial CTAN release.  
-**v1.01 (2020-09-11)** Added note that `hyperref` is required.  
-**v1.02 (2022-02-05)** Added `compactdois` option, documentation on DOIs.
+## v1.00 (2020-05-25) {-}
+
+- Initial CTAN release.
+
+## v1.01 (2020-09-11) {-}
+
+- Added note that `hyperref` is required.  
+
+## v1.1 (2022-02-05) {-}
+
+- Internal refactoring of handling of "von"-names
+- Changed `&` to be glued to previous author
+- Added `compactdois` option
+- Added documentation on DOIs
