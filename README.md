@@ -70,7 +70,7 @@ pandoc -f markdown -t latex biblatex-unified.md -s\
 
 ## License and copyright
 
-Copyright ©2020 Kai von Fintel. 
+Copyright ©2022 Kai von Fintel. 
 
 This package is author-maintained. Permission is granted to copy, distribute
 and/or modify this software under the terms of the LaTeX Project Public License,
