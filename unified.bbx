@@ -405,16 +405,35 @@
 \DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
 
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
-\DeclareFieldFormat{doi}{%
-  \ifhyperref
-    {\href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}}
-    {\nolinkurl{https://doi.org/#1}}}
-\DeclareFieldFormat{url}{\url{#1}}
 
 % This is for printing the volume field of a proceedings with an ISSN
 % as an article in accordance with the unified style sheet guidelines
 
 \DeclareFieldFormat{volume:unified:proc-as-article}{#1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display of DOIs etc.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The unified style displays DOIs according to the Crossref guidelines as full
+% `https://doi.org/...` links. But the user can choose to give the `compactdois'
+% option when loading biblatex, which will use a more compact display.
+
+\newtoggle{unified:compactdois}
+\DeclareBibliographyOption[boolean]{compactdois}[true]{%
+  \settoggle{unified:compactdois}{#1}}
+
+\DeclareFieldFormat{doi}{%
+  \iftoggle{unified:compactdois}%
+    {\mkbibacro{DOI}\addcolon\space%
+     \ifhyperref
+       {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+       {\nolinkurl{https://doi.org/#1}}}
+    {\ifhyperref
+      {\href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}}
+      {\nolinkurl{https://doi.org/#1}}}}
+  
+\DeclareFieldFormat{url}{\url{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The bibliography drivers, specifying the formats of each type of
