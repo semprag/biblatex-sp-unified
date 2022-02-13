@@ -474,7 +474,29 @@
 
 \DeclareFieldFormat{url}{\url{#1}}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex doesn't like things like "forthcoming'' in the year/date field. The     %
+% canonical way to do this is to put "forthcoming" in the `pubstate` field. Since  %
+% we want that to be treated as the label, we need to adjust some things. What we  %
+% do here is suggested at https://tex.stackexchange.com/a/444414/70432.            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\DeclareLabeldate{%
+  \field{date}
+  \field{year}
+  \field{eventdate}
+  \field{origdate}
+  \field{urldate}
+  \field{pubstate}
+  \literal{nodate}
+}
+
+\renewbibmacro*{addendum+pubstate}{%
+  \printfield{addendum}%
+  \newunit\newblock
+  \iffieldequalstr{labeldatesource}{pubstate}
+    {}
+    {\printfield{pubstate}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                         THE BIBLIOGRAPHY DRIVERS                                 %
