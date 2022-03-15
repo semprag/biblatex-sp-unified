@@ -1,7 +1,7 @@
 ---
 title: biblatex-unified
 author: Kai von Fintel (fintel@mit.edu)
-date: 2022-02-05
+date: 2022-03-xx (v1.20)
 colorlinks: true
 numbersections: true
 ...
@@ -275,7 +275,11 @@ The user can override `biblatex-unified` defaults as follows: the package option
             compactlinks, alllinks]{biblatex}
 ```
 
-If you're using the `sp.cls` document class with the `biblatex` option, you should instead add this to the preamble: `\ExecuteBibliographyOptions{compactlinks, alllinks}`{.latex}, if you want compact links and all links.
+If you're using the `sp.cls` document class with the `biblatex` option and you want compact links and all links, you should instead add this to the preamble: 
+
+```latex
+\ExecuteBibliographyOptions{compactlinks, alllinks}
+```
 
 If you're using the `compactlinks` option, you will notice that `biblatex-unified` parses the `url` field and will format any recognized eprint-links in the corresponding compact way. In other words, if the url in a bibentry is `http://www.jstor.org/stable/4178098`, the generated bibliography will contain `JSTOR: 4178098`.
 
@@ -288,7 +292,6 @@ For convenience, we repeat the best practices for preparing your bib file for us
 3. For conference proceedings, working papers, etc. For conference proceedings published with an ISSN, treat the proceedings as a journal: Include both the full conference name and any commonly used acronym for the conference (BLS, WCCFL, etc.) in the journal title position. Do not include the editors in the bib-file. For proceedings not published with an ISSN, treat the proceedings as any other book, using the full title as listed on the front cover or title page. If the title (and subtitle if there is one) only includes an acronym for the conference name, expand the acronym in square brackets or parentheses following the acronym. If the title does not include an acronym which is commonly used for the conference name, include the acronym in square brackets or parentheses following the conference name. The advantage of including the acronym after the society title is that it makes the entry much more identifiable in a list of references. Do not include “proceedings of the” or “papers from the”.
 4. For on-line materials, you can give the date the resource was accessed. Use the `urldate` field for this purpose and give the date in the YYYY-MM-DD format, e.g. `2013-08-11`.
 5. Use two-letter postal abbreviations for all US cities.
-
 
 # License and copyright
 
@@ -306,7 +309,7 @@ This software is provided “as is,” without warranty of any kind, either expr
 
 ## v1.01 (2020-09-11) {-}
 
-- Added note that `hyperref` is required.  
+- Added note that `hyperref` is required.
 
 ## v1.10 (2022-02-05) {-}
 
@@ -315,12 +318,10 @@ This software is provided “as is,” without warranty of any kind, either expr
 - Added `compactdois` option [now deprecated, superseded by `compactlinks`]
 - Added documentation on DOIs
 
-## v1.20 (2022-xx-yy) {-}
+## v1.20 (2022-03-xx) {-}
 
 - Better handling of links
 - Added `compactlinks` and `alllinks` options
 - Revised documentation on DOIs and other links
 - Fixed punctuation before subtitle
 - Improved handling of non-numerical dates ("forthcoming" etc.)
-
-
