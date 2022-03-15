@@ -96,7 +96,7 @@
 
 \title{biblatex-unified}
 \author{Kai von Fintel (fintel@mit.edu)}
-\date{2022-02-05}
+\date{2022-03-xx (v1.20)}
 
 \begin{document}
 \maketitle
@@ -180,7 +180,7 @@ simply add the \texttt{biblatex} class option when importing
 
 \begin{Shaded}
 \begin{Highlighting}[]
-    \BuiltInTok{\textbackslash{}documentclass}\NormalTok{[biblatex]\{}\ExtensionTok{sp}\NormalTok{\}}
+\BuiltInTok{\textbackslash{}documentclass}\NormalTok{[biblatex]\{}\ExtensionTok{sp}\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -192,10 +192,10 @@ but before
 
 \begin{Shaded}
 \begin{Highlighting}[]
-    \BuiltInTok{\textbackslash{}usepackage}\NormalTok{[backend=biber,}
-\NormalTok{                style=unified,}
-\NormalTok{                maxcitenames=3,}
-\NormalTok{                maxbibnames=99]\{}\ExtensionTok{biblatex}\NormalTok{\}}
+\BuiltInTok{\textbackslash{}usepackage}\NormalTok{[backend=biber,}
+\NormalTok{            style=unified,}
+\NormalTok{            maxcitenames=3,}
+\NormalTok{            maxbibnames=99]\{}\ExtensionTok{biblatex}\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
@@ -361,17 +361,21 @@ other bibliography styles):
 
 Option 1
 
-\begin{verbatim}
-title = {Government and Binding Theory and the Minimalist Program},
-subtitle = {Principles and Parameters in Syntactic Theory},
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{title = \{Government and Binding Theory and the Minimalist Program\},}
+\CommentTok{subtitle = \{Principles and Parameters in Syntactic Theory\},}
+\end{Highlighting}
+\end{Shaded}
 
 Option 2
 
-\begin{verbatim}
-title = {Government and Binding Theory and the Minimalist Program:  
-        {Principles} and Parameters in Syntactic Theory},
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{title = \{Government and Binding Theory and the Minimalist Program:  }
+\CommentTok{        \{Principles\} and Parameters in Syntactic Theory\},}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{quote}
 4. \textbf{All author/editor first names should be spelled out.} Not
@@ -483,17 +487,19 @@ hack than the other:
 \emph{Option 1}: Use the \texttt{@inproceedings} entry type and include
 the ISSN of the proceedings when available. Example:
 
-\begin{verbatim}
-@inproceedings{casali:1998a,
-    Author = {Casali, Roderic F.},
-    Booktitle = {Chicago Linguistic Society (CLS)},
-    ISSN = {0577-7240},
-    Number = {1},
-    Pages = {55-68},
-    Title = {Predicting {ATR} Activity},
-    Volume = {34},
-    Year = {1998}}
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{@inproceedings}\NormalTok{\{}\OtherTok{casali:1998a}\NormalTok{,}
+    \DataTypeTok{Author}\NormalTok{ = \{Casali, Roderic F.\},}
+    \DataTypeTok{Booktitle}\NormalTok{ = \{Chicago Linguistic Society (CLS)\},}
+    \DataTypeTok{ISSN}\NormalTok{ = \{0577{-}7240\},}
+    \DataTypeTok{Number}\NormalTok{ = \{1\},}
+    \DataTypeTok{Pages}\NormalTok{ = \{55{-}68\},}
+    \DataTypeTok{Title}\NormalTok{ = \{Predicting \{ATR\} Activity\},}
+    \DataTypeTok{Volume}\NormalTok{ = \{34\},}
+    \DataTypeTok{Year}\NormalTok{ = \{1998\}\}}
+\end{Highlighting}
+\end{Shaded}
 
 Comment: Following the Unified Style Sheet, we can let the presence of
 an ISSN control whether an article in conference proceedings is set like
@@ -525,16 +531,18 @@ to use the \texttt{@article} entry type, putting the conference name
 since journal titles are set as is) in the \texttt{journal} field, and
 do not list the editors. Example:
 
-\begin{verbatim}
-@article{casali:1998b,
-    Author = {Casali, Roderic F.},
-    Journal = {Chicago Linguistic Society (CLS)},
-    Number = {1},
-    Pages = {55-68},
-    Title = {Predicting {ATR} Activity},
-    Volume = {34},
-    Year = {1998}}
-\end{verbatim}
+\begin{Shaded}
+\begin{Highlighting}[]
+\VariableTok{@article}\NormalTok{\{}\OtherTok{casali:1998b}\NormalTok{,}
+    \DataTypeTok{Author}\NormalTok{ = \{Casali, Roderic F.\},}
+    \DataTypeTok{Journal}\NormalTok{ = \{Chicago Linguistic Society (CLS)\},}
+    \DataTypeTok{Number}\NormalTok{ = \{1\},}
+    \DataTypeTok{Pages}\NormalTok{ = \{55{-}68\},}
+    \DataTypeTok{Title}\NormalTok{ = \{Predicting \{ATR\} Activity\},}
+    \DataTypeTok{Volume}\NormalTok{ = \{34\},}
+    \DataTypeTok{Year}\NormalTok{ = \{1998\}\}}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{quote}
 11. \textbf{Use ``edn.'' as an abbreviation for ``edition'', thus ``2nd
@@ -699,52 +707,74 @@ pertain to any explicit guidelines.
 \section{Additional remarks on DOIs and other
 links}\label{additional-remarks-on-dois-and-other-links}}
 
-The Unified Style Sheet was devised before the widespread use of DOIs to
-identify the source of materials that are available electronically. It
-is good practice for authors to include DOIs in their bib-file for
-anything that has a DOI. Most modern publications prominently display
-the DOI on the first page of the work and/or in the metadata. Sometimes
-a DOI is harder to find, but \href{http://scholar.google.com/}{Google
-Scholar} and
+DOIs (digital object identifiers) are the best way to identify material
+available online. It is good practice for authors to include DOIs in
+their bib-file for anything that has a DOI. Most modern publications
+prominently display the DOI on the first page of the work and/or in the
+metadata. Sometimes a DOI is harder to find, but
+\href{http://scholar.google.com/}{Google Scholar} and
 \href{http://crossref.org/SimpleTextQuery/}{crossref.org/SimpleTextQuery}
-can help. \texttt{biblatex-unified} displays DOIs as a full link (such
-as \texttt{https://doi.org/10.3765/sp.10.1}) in accordance with
-\href{https://www.crossref.org/display-guidelines/}{the guidelines
-imposed by Crossref}. If you would like a more compact display
-(\texttt{DOI:10.3765/sp.10.1}), you can achieve this by adding the
-\texttt{compactdois} package option to the
-\VERB|\BuiltInTok{\textbackslash{}usepackage}| command:
+can help.
+
+Another kind of link is to established eprint sources. \texttt{biblatex}
+has built-in support for the following eprint-types: arxiv, jstor,
+pubmed, hdl, googlebooks. \texttt{biblatex-unified} adds support for two
+new eprint-types: \texttt{lingbuzz} (LingBuzz) and \texttt{roa} (Rutgers
+Optimality Archive). Example:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-    \BuiltInTok{\textbackslash{}usepackage}\NormalTok{[backend=biber,}
-\NormalTok{                style=unified,}
-\NormalTok{                maxcitenames=3,}
-\NormalTok{                maxbibnames=99,}
-\NormalTok{                compactdois]\{}\ExtensionTok{biblatex}\NormalTok{\}}
+\VariableTok{@unpublished}\NormalTok{\{}\OtherTok{conrod}\NormalTok{{-}}\OtherTok{2021}\NormalTok{{-}}\OtherTok{VariationEnglishGenderedPronouns}\NormalTok{,}
+  \DataTypeTok{author}\NormalTok{     = \{Conrod, Kirby\},}
+  \DataTypeTok{date}\NormalTok{       = \{2021{-}08\},}
+  \DataTypeTok{eprint}\NormalTok{     = \{006452\},}
+  \DataTypeTok{eprinttype}\NormalTok{ = \{lingbuzz\},}
+  \DataTypeTok{subtitle}\NormalTok{   = \{Analysis and Recommendations for Ethics in Linguistics\},}
+  \DataTypeTok{title}\NormalTok{      = \{Variation in \{\{English\}\} Gendered Pronouns\},}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\href{https://www.crossref.org/display-guidelines/}{Crossref guidelines}
+specify that DOIs should be displayed as full links (such as
+\texttt{https://doi.org/10.3765/sp.10.1}). \texttt{biblatex-unified}
+complies with this and extends the practice to the display of eprint
+information. Furthermore, \texttt{biblatex-unified} displays only one
+online link: DOI if available, eprint if there's no DOI, anything in the
+\texttt{url} field otherwise.
+
+The user can override \texttt{biblatex-unified} defaults as follows: the
+package option \texttt{compactlinks} displays DOIs and eprint info in a
+compact way (\texttt{DOI:\ 10.3765/sp.10.1} or \texttt{JSTOR:\ 4178098})
+and the package option \texttt{alllinks} displays all available links
+instead of just one. Example:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{\textbackslash{}usepackage}\NormalTok{[backend=biber,}
+\NormalTok{            style=unified,}
+\NormalTok{            maxcitenames=3,}
+\NormalTok{            maxbibnames=99,}
+\NormalTok{            compactlinks, alllinks]\{}\ExtensionTok{biblatex}\NormalTok{\}}
 \end{Highlighting}
 \end{Shaded}
 
 If you're using the \texttt{sp.cls} document class with the
-\texttt{biblatex} option, you should instead add this to the preamble:
-\VERB|\FunctionTok{\textbackslash{}ExecuteBibliographyOptions}\NormalTok{\{compactdois\}}|,
-if you want compact DOIs
-
-When \texttt{biblatex-unified} is used with the up-todate version of the
-\texttt{sp.cls} documentclass, once a bibentry has a DOI, a link in the
-\texttt{url} field will not also be displayed. If you want to achieve
-this effect with other document classes, you can add the following to
-your preamble after loading \texttt{biblatex-unified}:
+\texttt{biblatex} option and you want compact links and all links, you
+should instead add this to the preamble:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{\textbackslash{}DeclareSourcemap}\NormalTok{\{}
-        \FunctionTok{\textbackslash{}maps}\NormalTok{[datatype=bibtex]\{}
-        \FunctionTok{\textbackslash{}map}\NormalTok{\{}\FunctionTok{\textbackslash{}step}\NormalTok{[fieldsource=doi,final]}
-             \FunctionTok{\textbackslash{}step}\NormalTok{[fieldset=url,null]}
-             \FunctionTok{\textbackslash{}step}\NormalTok{[fieldset=urldate,null]\}\}\}}
+\FunctionTok{\textbackslash{}ExecuteBibliographyOptions}\NormalTok{\{compactlinks, alllinks\}}
 \end{Highlighting}
 \end{Shaded}
+
+If you're using the \texttt{compactlinks} option, you will notice that
+\texttt{biblatex-unified} parses the \texttt{url} field and will format
+any recognized eprint-links in the corresponding compact way. In other
+words, if the url in a bibentry is
+\texttt{http://www.jstor.org/stable/4178098}, the generated bibliography
+will contain \texttt{JSTOR:\ 4178098}.
 
 \hypertarget{guidelines-for-the-preparation-of-bib-files}{%
 \section{Guidelines for the preparation of bib
@@ -839,9 +869,28 @@ notes}\label{changelog-and-release-notes}}
 \item
   Changed \texttt{\&} to be glued to previous author
 \item
-  Added \texttt{compactdois} option
+  Added \texttt{compactdois} option {[}now deprecated, superseded by
+  \texttt{compactlinks}{]}
 \item
   Added documentation on DOIs
+\end{itemize}
+
+\hypertarget{v1.20-2022-03-xx}{%
+\subsection*{v1.20 (2022-03-xx)}\label{v1.20-2022-03-xx}}
+\addcontentsline{toc}{subsection}{v1.20 (2022-03-xx)}
+
+\begin{itemize}
+\tightlist
+\item
+  Better handling of links
+\item
+  Added \texttt{compactlinks} and \texttt{alllinks} options
+\item
+  Revised documentation on DOIs and other links
+\item
+  Fixed punctuation before subtitle
+\item
+  Improved handling of non-numerical dates (``forthcoming'' etc.)
 \end{itemize}
 
 \end{document}

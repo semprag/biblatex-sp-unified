@@ -9,7 +9,7 @@
 %% ---------------------------------------------------------------
 %%
 
-\ProvidesFile{unified.bbx}[2022/02/05 v1.10 biblatex bibliography style]
+\ProvidesFile{unified.bbx}[2022/xx/yy v1.20 biblatex bibliography style]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex by default calls biblatex.def, we add to this authoryear.bbx, which     %
@@ -19,7 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequireBibliographyStyle{authoryear}
-\ExecuteBibliographyOptions{dashed=false,isbn=false,eprint=false}
+\ExecuteBibliographyOptions{dashed=false,isbn=false,eprint=true}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % NB: The Unified Style Sheet wants abbreviated "ed(s)", "edn". But using the      %
@@ -455,24 +455,97 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % The unified style displays DOIs according to the Crossref guidelines as full
-% `https://doi.org/...'' links. But the user can choose to give the `compactdois'
+% `https://doi.org/...'' links. But the user can choose to give the `compactlinks
 % option when loading biblatex, which will use a more compact display.
 
-\newtoggle{unified:compactdois}
-\DeclareBibliographyOption[boolean]{compactdois}[true]{%
-  \settoggle{unified:compactdois}{#1}}
+\newtoggle{unified:compactlinks}
+\DeclareBibliographyOption[boolean]{compactlinks}[true]{%
+  \settoggle{unified:compactlinks}{#1}
+  \settoggle{bbx:eprint}{#1}}
 
 \DeclareFieldFormat{doi}{%
-  \iftoggle{unified:compactdois}%
-    {\mkbibacro{DOI}\addcolon\space%
-     \ifhyperref
-       {\href{https://doi.org/#1}{\nolinkurl{#1}}}
-       {\nolinkurl{https://doi.org/#1}}}
-    {\ifhyperref
-      {\href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}}
-      {\nolinkurl{https://doi.org/#1}}}}
+  \iftoggle{unified:compactlinks}%
+    {\mkbibacro{DOI}\addcolon\space\href{https://doi.org/#1}{\nolinkurl{#1}}}%
+    {\url{https://doi.org/#1}}}
 
 \DeclareFieldFormat{url}{\url{#1}}
+
+% Redefine jstor and googlebooks eprint formats (full links unless compactlinks option is set)
+
+\DeclareFieldFormat{eprint:jstor}{%
+  \iftoggle{unified:compactlinks}%
+    {\mkbibacro{JSTOR}\addcolon\space\href{http://www.jstor.org/stable/#1}{\nolinkurl{#1}}}
+    {\url{http://www.jstor.org/stable/#1}}}
+
+\DeclareFieldFormat{eprint:googlebooks}{%
+    \iftoggle{unified:compactlinks}%
+      {Google Books\addcolon\space{\href{http://books.google.com/books?id=#1}{\nolinkurl{#1}}}}
+      {\url{http://books.google.com/books?id=#1}}}
+
+% Print LingBuzz entries using an eprint field
+\DeclareFieldFormat{eprint:lingbuzz}{%
+  \iftoggle{unified:compactlinks}%
+    {LingBuzz\addcolon\space\href{https://ling.auf.net/lingbuzz/#1}{\nolinkurl{#1}}}
+    {\url{https://ling.auf.net/lingbuzz/#1}}}
+\DeclareFieldAlias{eprint:LingBuzz}{eprint:lingbuzz}
+
+% Print Rutgers Optimality Archive entries using an eprint field
+\DeclareFieldFormat{eprint:roa}{%
+  \iftoggle{unified:compactlinks}%
+  {\mkbibacro{ROA}\addcolon\space\href{https://roa.rutgers.edu/article/view/#1}{\nolinkurl{#1}}}
+  {\url{https://roa.rutgers.edu/article/view/#1}}}
+\DeclareFieldAlias{eprint:ROA}{eprint:roa}
+
+% Unless the user issues the option `alllinks`, if there's a DOI, only that will be
+% displayed, and if there's no DOI but an eprint, only that will be displayed. If
+% `alllinks` is issued, all links (up to three) will be displayed
+
+\newtoggle{unified:alllinks}
+\DeclareBibliographyOption[boolean]{alllinks}[true]{%
+  \settoggle{unified:alllinks}{#1}}
+
+% We first check whether the url field contains a link to a DOI or an established eprint source
+% If so, we put that info into the DOI or eprint fields
+\AtBeginDocument{%
+  \DeclareSourcemap{
+    \maps[datatype=bibtex]{
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/(dx\.)?doi\.org\/(.*)},final]
+           \step[fieldset=doi, fieldvalue={$3}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/ling\.auf\.net\/lingbuzz\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={lingbuzz}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/www\.jstor\.org\/stable\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={jstor}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/books\.google\.com\/books\?id=(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={googlebooks}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/roa\.rutgers\.edu\/article\/view\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={roa}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+       }}
+  \iftoggle{unified:alllinks}
+  {}
+  {\DeclareSourcemap{
+        \maps[datatype=bibtex]{
+          \map{\step[fieldsource=doi,final]
+               \step[fieldset=eprint,null]
+               \step[fieldset=eprinttype,null]
+               \step[fieldset=url,null]
+               \step[fieldset=urldate,null]}
+          \map{\step[fieldsource=eprint,final]
+               \step[fieldset=url,null]
+               \step[fieldset=urldate,null]}}}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % biblatex doesn't like things like "forthcoming'' in the year/date field. The     %
@@ -764,9 +837,7 @@
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
-  \iftoggle{bbx:url}
-    {\usebibmacro{url+urldate}}
-    {}%
+  \usebibmacro{doi+eprint+url}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
