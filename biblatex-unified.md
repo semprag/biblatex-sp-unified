@@ -1,7 +1,7 @@
 ---
 title: biblatex-unified
 author: Kai von Fintel (fintel@mit.edu)
-date: 2022-02-05
+date: 2022-11-08 (v1.20)
 colorlinks: true
 numbersections: true
 ...
@@ -10,7 +10,7 @@ numbersections: true
 
 `biblatex-unified` is an opinionated biblatex implementation of the [Unified Stylesheet for Linguistics Journal](https://www.linguisticsociety.org/resource/unified-style-sheet). The stylesheet was developed by [CELxJ, the Committee of Editors of Linguistics Journals](https://www.linguisticsociety.org/about/who-we-are/committees/editors-linguistics-journals-celxj). 
 
-The first implementation of the stylesheet for LaTeX was [`sp.bst`](https://raw.githubusercontent.com/semprag/tex/master/sp.cls), developed for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*). Bridget Samuels produced a revised version `unified.bst`, which has largely disappeared from the internet.
+The first implementation of the stylesheet for LaTeX was [`sp.bst`](https://raw.githubusercontent.com/semprag/tex/master/sp.bst), developed for the house-style of the journal [*Semantics and Pragmatics*](http://semprag.org) (*S&P*). Bridget Samuels produced a revised version `unified.bst`, which has largely disappeared from the internet.
 
 The current project is a ground-up re-implementation of the unified stylesheet in modern biblatex. It has been used by *S&P* in production for several years.
 
@@ -42,16 +42,16 @@ To use the style in conjunction with *S&P*'s [`sp.cls`{.latex}](https://raw.gith
 simply add the `biblatex` class option when importing `sp.cls`{.latex}:
 
 ```latex
-    \documentclass[biblatex]{sp}
+\documentclass[biblatex]{sp}
 ```
 
 If you are not using the *S&P* document class, you can still use this style by adding the following to your preamble (after `\documentclass{...}`{.latex} but before `\begin{document}`{.latex}):
 
 ```latex
-    \usepackage[backend=biber,
-                style=unified,
-                maxcitenames=3,
-                maxbibnames=99]{biblatex}
+\usepackage[backend=biber,
+            style=unified,
+            maxcitenames=3,
+            maxbibnames=99]{biblatex}
 ```
 
 The unified citation style relies on hyperlinking between in-text citations and the bibliography. So, the `hyperref` package is required. It is automatically loaded by `sp.cls` but if you use a different document class and `hyperref` is not loaded by that class, you need to add `\usepackage{hyperref}` to your preamble as well.
@@ -107,13 +107,17 @@ NB: It is to be encouraged that titles and subtitles be entered into separate fi
 
 Option 1
 
-    title = {Government and Binding Theory and the Minimalist Program},
-    subtitle = {Principles and Parameters in Syntactic Theory},
+```bibtex
+title = {Government and Binding Theory and the Minimalist Program},
+subtitle = {Principles and Parameters in Syntactic Theory},
+```
 
 Option 2
 
-    title = {Government and Binding Theory and the Minimalist Program:  
-            {Principles} and Parameters in Syntactic Theory},
+```bibtex
+title = {Government and Binding Theory and the Minimalist Program:  
+        {Principles} and Parameters in Syntactic Theory},
+```
 
 >4\. **All author/editor first names should be spelled out.** Not doing so only serves to make the citation less informative. Without full first names, the 20th century index for Language alone would conflate five different people as ‘J. Smith’, four as ‘J. Harris’, three each under ‘A. Cohen’ and ‘P. Lee’, two each under ‘R. Kent’, ‘J. Anderson’, ‘H. Klein’ and ‘J. Klein’.
 
@@ -155,15 +159,17 @@ NB: The examples included with the Unified Style Sheet do not include the editor
 
 *Option 1*: Use the `@inproceedings` entry type and include the ISSN of the proceedings when available. Example:
 
-    @inproceedings{casali:1998a,
-        Author = {Casali, Roderic F.},
-        Booktitle = {Chicago Linguistic Society (CLS)},
-        ISSN = {0577-7240},
-        Number = {1},
-        Pages = {55-68},
-        Title = {Predicting {ATR} Activity},
-        Volume = {34},
-        Year = {1998}}
+```bibtex
+@inproceedings{casali:1998a,
+    Author = {Casali, Roderic F.},
+    Booktitle = {Chicago Linguistic Society (CLS)},
+    ISSN = {0577-7240},
+    Number = {1},
+    Pages = {55-68},
+    Title = {Predicting {ATR} Activity},
+    Volume = {34},
+    Year = {1998}}
+```
 
 Comment: Following the Unified Style Sheet, we can let the presence of an ISSN control whether an article in conference proceedings is set like a journal article or like a book chapter. To do this, the bib-file needs to contain the ISSN of proceedings where possible. When the ISSN is in the bib-file, `biblatex-unified` will not print it with the entry but it will trigger setting as an article. If there's no ISSN in the entry, `biblatex-unified` will set it as a book chapter. The ISSN can be found through [WorldCat](http://www.worldcat.org) fairly easily. Here's a list of common conference proceedings with their ISSN:
 
@@ -175,14 +181,16 @@ Comment: Following the Unified Style Sheet, we can let the presence of an ISSN c
 
 *Option 2*: Another option, less portable and definitely a hack, is to use the `@article` entry type, putting the conference name (and the acronym in parentheses; no need to case protect the acronym, since journal titles are set as is) in the `journal` field, and do not list the editors. Example:
 
-    @article{casali:1998b,
-        Author = {Casali, Roderic F.},
-        Journal = {Chicago Linguistic Society (CLS)},
-        Number = {1},
-        Pages = {55-68},
-        Title = {Predicting {ATR} Activity},
-        Volume = {34},
-        Year = {1998}}
+```bibtex
+@article{casali:1998b,
+    Author = {Casali, Roderic F.},
+    Journal = {Chicago Linguistic Society (CLS)},
+    Number = {1},
+    Pages = {55-68},
+    Title = {Predicting {ATR} Activity},
+    Volume = {34},
+    Year = {1998}}
+```
 
 >11\. **Use “edn.” as an abbreviation for “edition”, thus “2nd edn.”.** This avoids ambiguity and confusion with “ed.” (editor).
 
@@ -240,27 +248,40 @@ We depart from the style sheet only in a few other places. These are actually on
 
 # Additional remarks on DOIs and other links
 
-The Unified Style Sheet was devised before the widespread use of DOIs to identify the source of materials that are available electronically. It is good practice for authors to include DOIs in their bib-file for anything that has a DOI. Most modern publications prominently display the DOI on the first page of the work and/or in the metadata. Sometimes a DOI is harder to find, but [Google Scholar](http://scholar.google.com/) and [crossref.org/SimpleTextQuery](http://crossref.org/SimpleTextQuery/) can help. `biblatex-unified` displays DOIs as a full link (such as `https://doi.org/10.3765/sp.10.1`) in accordance with [the guidelines imposed by Crossref](https://www.crossref.org/display-guidelines/). If you would like a more compact display (`DOI:10.3765/sp.10.1`), you can achieve this by adding the `compactdois` package option to the `\usepackage`{.latex} command: 
+DOIs (digital object identifiers) are the best way to identify material available online. It is good practice for authors to include DOIs in their bib-file for anything that has a DOI. Most modern publications prominently display the DOI on the first page of the work and/or in the metadata. Sometimes a DOI is harder to find, but [Google Scholar](http://scholar.google.com/) and [crossref.org/SimpleTextQuery](http://crossref.org/SimpleTextQuery/) can help.
 
-```latex
-    \usepackage[backend=biber,
-                style=unified,
-                maxcitenames=3,
-                maxbibnames=99,
-                compactdois]{biblatex}
+Another kind of link is to established eprint sources. `biblatex` has built-in support for the following eprint-types: arxiv, jstor, pubmed, hdl, googlebooks. `biblatex-unified` adds support for two new eprint-types: `lingbuzz` (LingBuzz) and `roa` (Rutgers Optimality Archive). Example:
+
+```bibtex
+@unpublished{conrod-2021-VariationEnglishGenderedPronouns,
+  author     = {Conrod, Kirby},
+  date       = {2021-08},
+  eprint     = {006452},
+  eprinttype = {lingbuzz},
+  subtitle   = {Analysis and Recommendations for Ethics in Linguistics},
+  title      = {Variation in {{English}} Gendered Pronouns},
+}
 ```
 
-If you're using the `sp.cls` document class with the `biblatex` option, you should instead add this to the preamble: `\ExecuteBibliographyOptions{compactdois}`{.latex}, if you want compact DOIs
+[Crossref guidelines](https://www.crossref.org/display-guidelines/) specify that DOIs should be displayed as full links (such as `https://doi.org/10.3765/sp.10.1`). `biblatex-unified` complies with this and extends the practice to the display of eprint information. Furthermore, `biblatex-unified` displays only one online link: DOI if available, eprint if there's no DOI, anything in the `url` field otherwise.
 
-When `biblatex-unified` is used with the up-todate version of the `sp.cls` documentclass, once a bibentry has a DOI, a link in the `url` field will not also be displayed. If you want to achieve this effect with other document classes, you can add the following to your preamble after loading `biblatex-unified`:
+The user can override `biblatex-unified` defaults as follows: the package option `compactlinks` displays DOIs and eprint info in a compact way (`DOI: 10.3765/sp.10.1` or `JSTOR: 4178098`) and the package option `alllinks` displays all available links instead of just one. Example:
 
 ```latex
-\DeclareSourcemap{
-        \maps[datatype=bibtex]{
-        \map{\step[fieldsource=doi,final]
-             \step[fieldset=url,null]
-             \step[fieldset=urldate,null]}}}
+\usepackage[backend=biber,
+            style=unified,
+            maxcitenames=3,
+            maxbibnames=99,
+            compactlinks, alllinks]{biblatex}
 ```
+
+If you're using the `sp.cls` document class with the `biblatex` option and you want compact links and all links, you should instead add this to the preamble: 
+
+```latex
+\ExecuteBibliographyOptions{compactlinks, alllinks}
+```
+
+If you're using the `compactlinks` option, you will notice that `biblatex-unified` parses the `url` field and will format any recognized eprint-links in the corresponding compact way. In other words, if the url in a bibentry is `http://www.jstor.org/stable/4178098`, the generated bibliography will contain `JSTOR: 4178098`.
 
 # Guidelines for the preparation of bib files
 
@@ -271,7 +292,6 @@ For convenience, we repeat the best practices for preparing your bib file for us
 3. For conference proceedings, working papers, etc. For conference proceedings published with an ISSN, treat the proceedings as a journal: Include both the full conference name and any commonly used acronym for the conference (BLS, WCCFL, etc.) in the journal title position. Do not include the editors in the bib-file. For proceedings not published with an ISSN, treat the proceedings as any other book, using the full title as listed on the front cover or title page. If the title (and subtitle if there is one) only includes an acronym for the conference name, expand the acronym in square brackets or parentheses following the acronym. If the title does not include an acronym which is commonly used for the conference name, include the acronym in square brackets or parentheses following the conference name. The advantage of including the acronym after the society title is that it makes the entry much more identifiable in a list of references. Do not include “proceedings of the” or “papers from the”.
 4. For on-line materials, you can give the date the resource was accessed. Use the `urldate` field for this purpose and give the date in the YYYY-MM-DD format, e.g. `2013-08-11`.
 5. Use two-letter postal abbreviations for all US cities.
-
 
 # License and copyright
 
@@ -289,11 +309,19 @@ This software is provided “as is,” without warranty of any kind, either expr
 
 ## v1.01 (2020-09-11) {-}
 
-- Added note that `hyperref` is required.  
+- Added note that `hyperref` is required.
 
 ## v1.10 (2022-02-05) {-}
 
 - Internal refactoring of handling of "von"-names
 - Changed `&` to be glued to previous author
-- Added `compactdois` option
+- Added `compactdois` option [now deprecated, superseded by `compactlinks`]
 - Added documentation on DOIs
+
+## v1.20 (2022-11-08) {-}
+
+- Better handling of links
+- Added `compactlinks` and `alllinks` options
+- Revised documentation on DOIs and other links
+- Fixed punctuation before subtitle
+- Improved handling of non-numerical dates ("forthcoming" etc.)

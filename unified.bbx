@@ -9,48 +9,57 @@
 %% ---------------------------------------------------------------
 %%
 
-\ProvidesFile{unified.bbx}[2022/02/05 v1.10 biblatex bibliography style]
+\ProvidesFile{unified.bbx}[2022/11/08 v1.20 biblatex bibliography style]
 
-% biblatex by default calls biblatex.def, we add to this authoryear.bbx, which
-% in turn loads standard.bbx. So, unified.bbx is built on top of those styles;
-% once authoryear.bbx is loaded, we tell it not to put in dashes for repeated
-% authors (in accordance with the Unified Stylesheet)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex by default calls biblatex.def, we add to this authoryear.bbx, which     %
+% in turn loads standard.bbx. So, unified.bbx is built on top of those styles;     %
+% once authoryear.bbx is loaded, we tell it not to put in dashes for repeated      %
+% authors (in accordance with the Unified Stylesheet)                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \RequireBibliographyStyle{authoryear}
-\ExecuteBibliographyOptions{dashed=false,isbn=false,eprint=false}
+\ExecuteBibliographyOptions{dashed=false,isbn=false,eprint=true}
 
-% NB: The Unified Style Sheet wants abbreviated "ed(s)", "edn". But using the
-% abbreviate option also abbreviates the names of months. But then
-% dateabbrev=false restores the long names of months
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NB: The Unified Style Sheet wants abbreviated "ed(s)", "edn". But using the      %
+% abbreviate option also abbreviates the names of months. But then                 %
+% dateabbrev=false restores the long names of months                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \ExecuteBibliographyOptions{%
   sorting=nyt,abbreviate,dateabbrev=false,useprefix=true}
 
-% For backward compatibility: choose labeldate or labeldateparts
-% depending on the biblatex version
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For backward compatibility: choose labeldate or labeldateparts                   %
+% depending on the biblatex version                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \@ifpackagelater{biblatex}{2016/09/09} {%
   \ExecuteBibliographyOptions{labeldateparts}} {%
   \ExecuteBibliographyOptions{labeldate}
   \def\printlabeldateextra{\printdateextralabel} }%
 
-% If an @article entry contains Issuetitle and Editor information, we
-% might not want to print it. The Unified Style Sheet does not offer
-% explicit guidelines on this, but they don't have any examples where
-% either of these pieces of information are actually printed.
-% Therefore, we can offer an option for the user to decide whether to
-% print it. The default will be not to print it since the Unified
-% Style Sheet does not have examples where this information is
-% printed. The user can print it by setting `issueandeditor=true` as a
-% package option when biblatex is called.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% If an @article entry contains Issuetitle and Editor information, we              %
+% might not want to print it. The Unified Style Sheet does not offer               %
+% explicit guidelines on this, but they don't have any examples where              %
+% either of these pieces of information are actually printed.                      %
+% Therefore, we can offer an option for the user to decide whether to              %
+% print it. The default will be not to print it since the Unified                  %
+% Style Sheet does not have examples where this information is                     %
+% printed. The user can print it by setting `issueandeditor=true` as a             %
+% package option when biblatex is called.                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newtoggle{issueandeditor}
 \DeclareBibliographyOption{issueandeditor}[false]{%
   \settoggle{issueandeditor}{#1}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Treating prefixes like "von" as part of the last name, but ignore them for
-% sorting (relies on useprefix=true default option)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Treating prefixes like "von" as part of the last name, but ignore them for       %
+% sorting (relies on useprefix=true default option)                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareSortingNamekeyTemplate{
   \keypart{
@@ -69,9 +78,9 @@
 
 \renewbibmacro{begentry}{\midsentence}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Moving "Jr." to after the first name
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Moving "Jr." to after the first name                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewbibmacro*{name:family-given}[4]{%
   \usebibmacro{name:delim}{#3#1}%
@@ -92,13 +101,15 @@
        {\revsdnamepunct\bibnamedelimd\mkbibnamesuffix{#4}\isdot}}
   }
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Various bibmacros used in producing the bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%             VARIOUS BIBMACROS USED IN PRODUCING THE BIBLIOGRAPHY                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% We use `date+extradate` but biblatex versions before 3.8 didn't have that
-% macro. Older versions were smart enough to complain about `\renewmacro` and
-% use `\newmacro` instead. But the following construction works for both cases
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% We use `date+extradate` but biblatex versions before 3.8 didn't have that        %
+% macro. Older versions were smart enough to complain about `\renewmacro` and      %
+% use `\newmacro` instead. But the following construction works for both cases     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \providebibmacro{date+extradate}{}
 \renewbibmacro*{date+extradate}{%
@@ -205,9 +216,11 @@
     {}%
   \newunit}
 
-% The next three bib macros are for printing the maintitle and
-% booktitle fields of an @inproceedings entry with an ISSN as an
-% article in accordance with the unified style sheet guidelines.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The next three bib macros are for printing the maintitle and                     %
+% booktitle fields of an @inproceedings entry with an ISSN as an                   %
+% article in accordance with the unified style sheet guidelines.                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % 1. maintitle
 
@@ -258,9 +271,11 @@
   \setunit{\addcomma\space}%
   \printfield{eid}}
 
-% This is for printing the volume field of a proceedings with an ISSN
-% as an article in accordance with the unified style sheet guidelines.
-% It depends on the declared field format below.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is for printing the volume field of a proceedings with an ISSN              %
+% as an article in accordance with the unified style sheet guidelines.             %
+% It depends on the declared field format below.                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newbibmacro*{unified:proc-as-article:volume+number+eid}{%
   \printfield[volume:unified:proc-as-article]{volume}%
@@ -268,9 +283,11 @@
   \setunit{\addcomma\space}%
   \printfield{eid}}
 
-% Because of the weird format "3 May, 2007" specified in the Unified
-% Stylesheet for URL access dates, we need a special way to format the
-% urldate
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Because of the weird format "3 May, 2007" specified in the Unified               %
+% Stylesheet for URL access dates, we need a special way to format the             %
+% urldate                                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\mkbibdateunified}[3]{% Year-Month-Day as input --> xx Month, Year
   \iffieldundef{#3}
@@ -347,8 +364,10 @@
   \usebibmacro{date}%
   \newunit}
 
-% The following is a hack to satisfy the Unified Stylesheet's decision
-% to give the edition right after the OED as used as a sortlabel.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The following is a hack to satisfy the Unified Stylesheet's decision             %
+% to give the edition right after the OED as used as a sortlabel.                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewbibmacro*{labeltitle}{%
   \iffieldundef{label}
@@ -361,24 +380,36 @@
        {\printfield[title]{shorttitle}}}
     {\printfield{label}}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Punctuation & formatting
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         PUNCTUATION & FORMATTING                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% This gets rid of the Oxford comma in name lists and uses the
-% ampersand rather than "and":
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This gets rid of the Oxford comma in name lists and uses the                     %
+% ampersand rather than "and":                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand*{\finalnamedelim}{\addnbspace\&\addspace}
 \renewcommand*{\finallistdelim}{\addnbspace\&\addspace}
 
-% no colon after "In" in incollection entries (overriding
-% biblatex.def):
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% no colon after "In" in incollection entries (overriding                          %
+% biblatex.def):                                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand{\intitlepunct}{\addspace}
 
-\renewcommand{\subtitlepunct}{\addcolon\space}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Subtitles are indicated with a colon after the main title, unless the title      %
+% ends in a punctuation mark. %                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% No comma before pages, just the usual new unit period
+\renewcommand{\subtitlepunct}{\addcolon\space}
+\DefineBibliographyExtras{english}{\DeclarePunctuationPairs{colon}{*}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% No comma before pages, just the usual new unit period                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand*{\bibpagespunct}{\newunitpunct}
 
@@ -387,65 +418,173 @@
   phdthesis = {dissertation},
 }
 
-% basically everything is in sentence case, other than journals and
-% book series (recurring titles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% basically everything is in sentence case, other than journals and                %
+% book series (recurring titles)                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareFieldFormat[%
   article,book,collection,incollection,inproceedings,thesis,unpublished]%
   {titlecase}{\MakeSentenceCase*{#1}}%
 
-% No quotes around titles
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% No quotes around titles                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareFieldFormat[%
   article,inbook,incollection,inproceedings,patent,thesis,unpublished]%
   {title}{#1}
 
-% Just like book titles, thesis titles are in italics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Just like book titles, thesis titles are in italics                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
 
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
 
-% This is for printing the volume field of a proceedings with an ISSN
-% as an article in accordance with the unified style sheet guidelines
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This is for printing the volume field of a proceedings with an ISSN              %
+% as an article in accordance with the unified style sheet guidelines              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareFieldFormat{volume:unified:proc-as-article}{#1}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Display of DOIs etc.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display of DOIs etc.                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % The unified style displays DOIs according to the Crossref guidelines as full
-% `https://doi.org/...` links. But the user can choose to give the `compactdois'
+% `https://doi.org/...'' links. But the user can choose to give the `compactlinks
 % option when loading biblatex, which will use a more compact display.
 
-\newtoggle{unified:compactdois}
-\DeclareBibliographyOption[boolean]{compactdois}[true]{%
-  \settoggle{unified:compactdois}{#1}}
+\newtoggle{unified:compactlinks}
+\DeclareBibliographyOption[boolean]{compactlinks}[true]{%
+  \settoggle{unified:compactlinks}{#1}
+  \settoggle{bbx:eprint}{#1}}
 
 \DeclareFieldFormat{doi}{%
-  \iftoggle{unified:compactdois}%
-    {\mkbibacro{DOI}\addcolon\space%
-     \ifhyperref
-       {\href{https://doi.org/#1}{\nolinkurl{#1}}}
-       {\nolinkurl{https://doi.org/#1}}}
-    {\ifhyperref
-      {\href{https://doi.org/#1}{\nolinkurl{https://doi.org/#1}}}
-      {\nolinkurl{https://doi.org/#1}}}}
-  
+  \iftoggle{unified:compactlinks}%
+    {\mkbibacro{DOI}\addcolon\space\href{https://doi.org/#1}{\nolinkurl{#1}}}%
+    {\url{https://doi.org/#1}}}
+
 \DeclareFieldFormat{url}{\url{#1}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% The bibliography drivers, specifying the formats of each type of
-% entry in the bibliography
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefine jstor and googlebooks eprint formats (full links unless compactlinks option is set)
 
-%%% First, the entry types used in the Unified Test Bibliography.
-%%% Could rely on standard.bbx for all others as a fallback.
+\DeclareFieldFormat{eprint:jstor}{%
+  \iftoggle{unified:compactlinks}%
+    {\mkbibacro{JSTOR}\addcolon\space\href{http://www.jstor.org/stable/#1}{\nolinkurl{#1}}}
+    {\url{http://www.jstor.org/stable/#1}}}
 
-% For the article type, the only departure from standard.bbx is that
-% we don't use a literal "In: " before the journal title; other
-% formatting departures are done in the format specs and bibmacros
+\DeclareFieldFormat{eprint:googlebooks}{%
+    \iftoggle{unified:compactlinks}%
+      {Google Books\addcolon\space{\href{http://books.google.com/books?id=#1}{\nolinkurl{#1}}}}
+      {\url{http://books.google.com/books?id=#1}}}
+
+% Print LingBuzz entries using an eprint field
+\DeclareFieldFormat{eprint:lingbuzz}{%
+  \iftoggle{unified:compactlinks}%
+    {LingBuzz\addcolon\space\href{https://ling.auf.net/lingbuzz/#1}{\nolinkurl{#1}}}
+    {\url{https://ling.auf.net/lingbuzz/#1}}}
+\DeclareFieldAlias{eprint:LingBuzz}{eprint:lingbuzz}
+
+% Print Rutgers Optimality Archive entries using an eprint field
+\DeclareFieldFormat{eprint:roa}{%
+  \iftoggle{unified:compactlinks}%
+  {\mkbibacro{ROA}\addcolon\space\href{https://roa.rutgers.edu/article/view/#1}{\nolinkurl{#1}}}
+  {\url{https://roa.rutgers.edu/article/view/#1}}}
+\DeclareFieldAlias{eprint:ROA}{eprint:roa}
+
+% Unless the user issues the option `alllinks`, if there's a DOI, only that will be
+% displayed, and if there's no DOI but an eprint, only that will be displayed. If
+% `alllinks` is issued, all links (up to three) will be displayed
+
+\newtoggle{unified:alllinks}
+\DeclareBibliographyOption[boolean]{alllinks}[true]{%
+  \settoggle{unified:alllinks}{#1}}
+
+% We first check whether the url field contains a link to a DOI or an established eprint source
+% If so, we put that info into the DOI or eprint fields
+\AtBeginDocument{%
+  \DeclareSourcemap{
+    \maps[datatype=bibtex]{
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/(dx\.)?doi\.org\/(.*)},final]
+           \step[fieldset=doi, fieldvalue={$3}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/ling\.auf\.net\/lingbuzz\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={lingbuzz}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/www\.jstor\.org\/stable\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={jstor}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/books\.google\.com\/books\?id=(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={googlebooks}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+      \map{\step[fieldsource=url,match=\regexp{(http|https):\/\/roa\.rutgers\.edu\/article\/view\/(.*)},final]
+           \step[fieldset=eprint, fieldvalue={$2}]
+           \step[fieldset=eprinttype, fieldvalue={roa}]
+           \step[fieldset=url,null]
+           \step[fieldset=urldate,null]}
+       }}
+  \iftoggle{unified:alllinks}
+  {}
+  {\DeclareSourcemap{
+        \maps[datatype=bibtex]{
+          \map{\step[fieldsource=doi,final]
+               \step[fieldset=eprint,null]
+               \step[fieldset=eprinttype,null]
+               \step[fieldset=url,null]
+               \step[fieldset=urldate,null]}
+          \map{\step[fieldsource=eprint,final]
+               \step[fieldset=url,null]
+               \step[fieldset=urldate,null]}}}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex doesn't like things like "forthcoming'' in the year/date field. The     %
+% canonical way to do this is to put "forthcoming" in the `pubstate` field. Since  %
+% we want that to be treated as the label, we need to adjust some things. What we  %
+% do here is suggested at https://tex.stackexchange.com/a/444414/70432.            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareLabeldate{%
+  \field{date}
+  \field{year}
+  \field{eventdate}
+  \field{origdate}
+  \field{urldate}
+  \field{pubstate}
+  \literal{nodate}
+}
+
+\renewbibmacro*{addendum+pubstate}{%
+  \printfield{addendum}%
+  \newunit\newblock
+  \iffieldequalstr{labeldatesource}{pubstate}
+    {}
+    {\printfield{pubstate}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                         THE BIBLIOGRAPHY DRIVERS                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% First, the entry types used in the Unified Test Bibliography.                    %
+% Could rely on standard.bbx for all others as a fallback.                         %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For the article type, the only departure from standard.bbx is that               %
+% we don't use a literal "In: " before the journal title; other                    %
+% formatting departures are done in the format specs and bibmacros                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyDriver{article}{%
   \usebibmacro{bibindex}%
@@ -530,33 +669,39 @@
     {}%
   \usebibmacro{finentry}}
 
-% Aliased to ensure no period between the title and the series.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Aliased to ensure no period between the title and the series.                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyAlias{collection}{book}
 
-% @inbook entries look terrible as-is, and have fields very similar to
-% @incollection anyway
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% @inbook entries look terrible as-is, and have fields very similar to             %
+% @incollection anyway                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyAlias{inbook}{incollection}
 
 \DeclareBibliographyAlias{incollection}{inproceedings}
 
-% Given the guidelines in the unified style sheet, we should print
-% conference proceedings and working papers as @article's just in case
-% the publication has an ISSN. So, rather than have users handle this
-% in the database by changing the entry type, we can implement this by
-% checking if the inproceedings entry has an ISSN. If the field is
-% undefined, the driver will do what driver did for @inproceedings
-% entries as of 512f11657199a6044f7663da454f3eac338bdbd5 except that
-% \printlist{organization} and \newunit have been removed. On the
-% other hand, if the ISSN field is not undefined, then we will do
-% largely the exact same thing that we do in the @article driver,
-% except that we use the two macros
-% \usebibmacro{unified:proc-as-article:maintitle+booktitle} and
-% \usebibmacro{unified:proc-as-article:volume+number+eid} instead of
-% \usebibmacro{journal+issuetitle} and except that
-% \usebibmacro{byeditor+others} has been removed so as to ensure that
-% the editors are not listed even if they are present in the database.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Given the guidelines in the unified style sheet, we should print                 %
+% conference proceedings and working papers as @article's just in case             %
+% the publication has an ISSN. So, rather than have users handle this              %
+% in the database by changing the entry type, we can implement this by             %
+% checking if the inproceedings entry has an ISSN. If the field is                 %
+% undefined, the driver will do what driver did for @inproceedings                 %
+% entries as of 512f11657199a6044f7663da454f3eac338bdbd5 except that               %
+% \printlist{organization} and \newunit have been removed. On the                  %
+% other hand, if the ISSN field is not undefined, then we will do                  %
+% largely the exact same thing that we do in the @article driver,                  %
+% except that we use the two macros                                                %
+% \usebibmacro{unified:proc-as-article:maintitle+booktitle} and                    %
+% \usebibmacro{unified:proc-as-article:volume+number+eid} instead of               %
+% \usebibmacro{journal+issuetitle} and except that                                 %
+% \usebibmacro{byeditor+others} has been removed so as to ensure that              %
+% the editors are not listed even if they are present in the database.             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclareBibliographyDriver{inproceedings}{%
   \usebibmacro{bibindex}%
@@ -692,9 +837,7 @@
   \newunit\newblock
   \usebibmacro{location+date}%
   \newunit\newblock
-  \iftoggle{bbx:url}
-    {\usebibmacro{url+urldate}}
-    {}%
+  \usebibmacro{doi+eprint+url}%
   \newunit\newblock
   \usebibmacro{addendum+pubstate}%
   \setunit{\bibpagerefpunct}\newblock
