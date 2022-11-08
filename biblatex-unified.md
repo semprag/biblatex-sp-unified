@@ -1,7 +1,7 @@
 ---
 title: biblatex-unified
 author: Kai von Fintel (fintel@mit.edu)
-date: 2022-03-xx (v1.20)
+date: 2022-11-08 (v1.20)
 colorlinks: true
 numbersections: true
 ...
@@ -318,7 +318,7 @@ This software is provided “as is,” without warranty of any kind, either expr
 - Added `compactdois` option [now deprecated, superseded by `compactlinks`]
 - Added documentation on DOIs
 
-## v1.20 (2022-03-xx) {-}
+## v1.20 (2022-11-08) {-}
 
 - Better handling of links
 - Added `compactlinks` and `alllinks` options

@@ -34,18 +34,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={biblatex-unified},
-  pdfauthor={Kai von Fintel (fintel@mit.edu)},
-  colorlinks=true,
-  linkcolor={Maroon},
-  filecolor={Maroon},
-  citecolor={Blue},
-  urlcolor={Blue},
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -93,10 +81,22 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={biblatex-unified},
+  pdfauthor={Kai von Fintel (fintel@mit.edu)},
+  colorlinks=true,
+  linkcolor={Maroon},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
 
 \title{biblatex-unified}
 \author{Kai von Fintel (fintel@mit.edu)}
-\date{2022-03-xx (v1.20)}
+\date{2022-11-08 (v1.20)}
 
 \begin{document}
 \maketitle
@@ -875,9 +875,9 @@ notes}\label{changelog-and-release-notes}}
   Added documentation on DOIs
 \end{itemize}
 
-\hypertarget{v1.20-2022-03-xx}{%
-\subsection*{v1.20 (2022-03-xx)}\label{v1.20-2022-03-xx}}
-\addcontentsline{toc}{subsection}{v1.20 (2022-03-xx)}
+\hypertarget{v1.20-2022-11-08}{%
+\subsection*{v1.20 (2022-11-08)}\label{v1.20-2022-11-08}}
+\addcontentsline{toc}{subsection}{v1.20 (2022-11-08)}
 
 \begin{itemize}
 \tightlist
