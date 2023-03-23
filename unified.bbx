@@ -381,6 +381,21 @@
     {\printfield{label}}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% biblatex standard bbx prints the note field together with the pages field. This  %
+% rewrites the note entry to the addendum entry, which is more to the end.         %   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=note, final]
+      \step[fieldset=addendum, origfieldval, final]
+      \step[fieldset=note, null]
+    }
+  }
+}
+   
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                         PUNCTUATION & FORMATTING                                 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -565,11 +580,11 @@
 }
 
 \renewbibmacro*{addendum+pubstate}{%
-  \printfield{addendum}%
-  \newunit\newblock
   \iffieldequalstr{labeldatesource}{pubstate}
     {}
-    {\printfield{pubstate}}}
+    {\printfield{pubstate}}
+  \newunit\newblock
+  \printfield[parens]{addendum}}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                         THE BIBLIOGRAPHY DRIVERS                                 %
