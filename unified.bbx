@@ -699,6 +699,12 @@
 
 \DeclareBibliographyAlias{incollection}{inproceedings}
 
+% We want inheritance from book to incollection
+\DeclareDataInheritance{book}{incollection}{%
+  \inherit{title}{booktitle}
+  \inherit{subtitle}{booksubtitle}
+  \inherit{titleaddon}{booktitleaddon}}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Given the guidelines in the unified style sheet, we should print                 %
 % conference proceedings and working papers as @article's just in case             %
