@@ -7,7 +7,7 @@ The first implementation of the stylesheet for LaTeX was [`sp.bst`](https://raw.
 
 The current project is a ground-up re-implementation of the unified stylesheet in modern biblatex. It has been used by *S&P* in production for several years.
 
-Please [file an issue at github](https://github.com/semprag/biblatex-sp-unified/issues/new) to let us know of any problems you encounter and any recommendations for improvement.
+Please [file an issue at github](https://github.com/semprag/biblatex-unified/issues/new) to let us know of any problems you encounter and any recommendations for improvement.
 
 
 ## Sources
