@@ -295,7 +295,7 @@ For convenience, we repeat the best practices for preparing your bib file for us
 
 # License and copyright
 
-Copyright ©2022 Kai von Fintel. 
+Copyright ©2025 Kai von Fintel. 
 
 This package is author-maintained. Permission is granted to copy, distribute and/or modify this software under the terms of the LaTeX Project Public License, version 1.3c.
 
@@ -325,3 +325,8 @@ This software is provided “as is,” without warranty of any kind, either expr
 - Revised documentation on DOIs and other links
 - Fixed punctuation before subtitle
 - Improved handling of non-numerical dates ("forthcoming" etc.)
+
+## v1.30 (2025-01-29) {-}
+
+- Minor fixes
+- Eliminated ugly legacy code
