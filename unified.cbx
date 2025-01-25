@@ -30,6 +30,15 @@
 \renewcommand*{\postnotedelim}{\addcolon\space}
 \renewcommand*{\multicitedelim}{\addcomma\space}
 
+% The default "p./pp." prefixes in postnotes are not in keeping with
+% the minimalist leanings of the Unified Stylesheet, so we define them
+% away. See https://github.com/semprag/biblatex-sp-unified/issues/49.
+
+\DefineBibliographyStrings{english}{%
+  page                  =       {},
+  pages                 =       {},
+}
+
 % Apart from setting some options, the main change from
 % authoryear-comp is that we extend what parts of a citation label are
 % hyperlinked (to match what natbib did in the old days). The solution
