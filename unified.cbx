@@ -39,4 +39,97 @@
   pages                 =       {},
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Legacy citation commands                                                         %
+%                                                                                  %
+% These commands have been part of S&P's author convenience macros since the      %
+% beginning. They were removed in v1.30 but are available via the package option  %
+% `legacycitecommands`. We recommend using standard biblatex commands instead,    %
+% such as `\citet[42]{key}` for page citations.                                   %
+%                                                                                  %
+% Commands provided:                                                               %
+%   \pgcitep{key}{page}      - (Author Year: page)                                %
+%   \pgcitealt{key}{page}    - Author Year: page                                  %
+%   \pgcitet{key}{page}      - Author (Year: page)                                %
+%   \pgposscitet{key}{page}  - Author's (Year: page)                              %
+%   \seccitep{key}{sec}      - (Author Year: §sec)                                %
+%   \seccitealt{key}{sec}    - Author Year: §sec                                  %
+%   \seccitet{key}{sec}      - Author (Year: §sec)                                %
+%   \secposscitet{key}{sec}  - Author's (Year: §sec)                              %
+%   \posscitet{key}          - Author's (Year) - proper possessive textcite       %
+%   \posscitealt{key}        - Author's Year                                       %
+%   \possciteauthor{key}     - Author's                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newtoggle{unified:legacycitecommands}
+\DeclareBibliographyOption[boolean]{legacycitecommands}[true]{%
+  \settoggle{unified:legacycitecommands}{#1}}
+
+\AtEndPreamble{%
+\iftoggle{unified:legacycitecommands}{%
+  %
+  % Simple page citation commands
+  %
+  \newcommand{\pgcitep}[2]{(\citeauthor{#1} \citeyear{#1}:~#2)}
+  \newcommand{\pgcitealt}[2]{\citeauthor{#1} \citeyear{#1}:~#2}
+  \newcommand{\pgcitet}[2]{\citeauthor{#1} (\citeyear{#1}:~#2)}
+  \newcommand{\pgposscitet}[2]{\citeauthor{#1}'s (\citeyear{#1}:~#2)}
+  %
+  % Simple section citation commands
+  %
+  \newcommand{\seccitealt}[2]{\citeauthor{#1} \citeyear{#1}:~\S#2}
+  \newcommand{\seccitep}[2]{(\citeauthor{#1} \citeyear{#1}:~\S#2)}
+  \newcommand{\seccitet}[2]{\citeauthor{#1} (\citeyear{#1}:~\S#2)}
+  \newcommand{\secposscitet}[2]{\citeauthor{#1}'s (\citeyear{#1}:~\S#2)}
+  %
+  % Possessive citation commands
+  % These are more complex as they need to handle multiple citations properly
+  %
+  % \posscitealt: Author's Year (simple inline possessive)
+  \DeclareCiteCommand{\posscitealt}
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}}
+    {\printtext[bibhyperref]{%
+       \printnames{labelname}'s \printlabeldateextra}}
+    {\multicitedelim}
+    {}
+  %
+  % \possciteauthor: Author's (just the possessive author name)
+  \DeclareCiteCommand{\possciteauthor}
+    {\boolfalse{citetracker}%
+     \boolfalse{pagetracker}}
+    {\printtext[bibhyperref]{\printnames{labelname}'s}}
+    {\multicitedelim}
+    {}
+  %
+  % \posscitet: Author's (Year) - possessive textcite
+  % This is a simpler implementation. For multiple citations with the same
+  % author, they share the possessive; for different authors, each gets
+  % its own possessive form.
+  %
+  \newbibmacro*{unified:posscite}{%
+    \iffieldequals{namehash}{\cbx@lasthash}
+      {% Same author as previous citation - just add year
+       \addcomma\space%
+       \printtext[bibhyperref]{\printlabeldateextra}}
+      {% Different author - print possessive form
+       \ifnumgreater{\value{citecount}}{1}
+         {\bibcloseparen\multicitedelim}
+         {}%
+       \printtext[bibhyperref]{%
+         \printnames{labelname}'s%
+         \addspace\bibopenparen%
+         \printlabeldateextra}%
+       \savefield{namehash}{\cbx@lasthash}}}
+  %
+  \DeclareCiteCommand{\posscitet}
+    {\usebibmacro{cite:init}%
+     \global\undef\cbx@lasthash%
+     \usebibmacro{prenote}}
+    {\usebibmacro{citeindex}%
+     \usebibmacro{unified:posscite}}
+    {}
+    {\bibcloseparen\usebibmacro{postnote}}
+}{}}% End of \iftoggle{unified:legacycitecommands}
+
 \endinput
