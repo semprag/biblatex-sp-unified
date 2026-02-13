@@ -579,6 +579,16 @@
   \literal{nodate}
 }
 
+% When the date label comes from pubstate (e.g. "forthcoming"), the extradate
+% disambiguator (a, b, ...) needs square brackets: "forthcoming[a]". Without this,
+% biblatex's inner/outer delimiter system produces inconsistent results: brackets
+% inside \citet/\citep (which have their own parens) but parentheses in \citealt/\cite
+% and in the bibliography. For normal year-based labels, the bare letter is fine: "2020b".
+\DeclareFieldFormat{extradate}{%
+  \iffieldequalstr{labeldatesource}{pubstate}
+    {\mkbibbrackets{\mknumalph{#1}}}
+    {\mknumalph{#1}}}
+
 \renewbibmacro*{addendum+pubstate}{%
   \iffieldequalstr{labeldatesource}{pubstate}
     {}
